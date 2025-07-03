@@ -4,10 +4,9 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
 
 ## Workshop Details
 
-**Date:** [TBD - Workshop Date]  
-**Venue:** [TBD - Workshop Venue]  
-**Duration:** Full Day Workshop  
-**Registration:** [TBD - Ticket Purchase Link]
+📅 **Date:** [TBD - Workshop Date]  
+📍 **Venue:** [TBD - Workshop Venue]  
+🎟️ **Registration:** [TBD - Ticket Purchase Link]
 
 ## Topics/Modules Covered
 
@@ -47,12 +46,9 @@ cd mastering_llms_workshop_dhs2025
 
 ## Prerequisites
 
-### Technical Prerequisites
 - [TBD - Required programming languages and proficiency levels]
 - [TBD - Machine learning and deep learning background requirements]
 - [TBD - Familiarity with specific frameworks or tools]
-
-### Knowledge Prerequisites
 - [TBD - Mathematical foundations required (linear algebra, statistics, etc.)]
 - [TBD - Understanding of neural networks and deep learning concepts]
 - [TBD - Prior experience with NLP concepts]
@@ -74,16 +70,12 @@ If you use materials from this workshop in your research or projects, please cit
 ```bibtex
 @misc{mastering_llms_workshop_2025,
   title={Mastering LLMs: Training, Fine-Tuning, and Best Practices},
-  author={[TBD - Workshop Author Name]},
+  author={Raghav Bali},
   year={2025},
   url={https://github.com/raghavbali/mastering_llms_workshop_dhs2025},
   note={Workshop materials for DHS 2025}
 }
 ```
-
-## License
-
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
