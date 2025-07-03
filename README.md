@@ -88,5 +88,5 @@ If you use materials from this workshop in your research or projects, please cit
 For questions about the workshop content or materials, please [open an issue](https://github.com/raghavbali/mastering_llms_workshop_dhs2025/issues) in this repository.
 
 **Author:**
-- 💼 **LinkedIn:** [TBD - Author's LinkedIn Profile]
-- 🌐 **Website:** [TBD - Author's Website]
+- 💼 **LinkedIn:** www.linkedin.com/in/baliraghav
+- 🌐 **Website:** https://raghavbali.github.io/
