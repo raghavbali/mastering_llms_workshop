@@ -8,7 +8,7 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
 📍 **Venue:** [TBD - Workshop Venue]  
 🎟️ **Registration:** [TBD - Ticket Purchase Link]
 
-## Topics/Modules Covered
+## Modules
 
 ### Module 01: Language Modeling
 [TBD - Description of language modeling fundamentals, statistical approaches, and foundational concepts that underpin modern LLMs]
@@ -25,7 +25,8 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
 ### Module 05: Next Frontier
 [TBD - Description of emerging trends, future directions, multimodal models, and cutting-edge research in the LLM space]
 
-## Setup Instructions
+<details>
+<summary>## Setup Instructions</summary>
 
 ### Prerequisites
 Before attending the workshop, please ensure you have the following installed:
@@ -44,7 +45,10 @@ cd mastering_llms_workshop_dhs2025
 ### Hardware Requirements
 [TBD - Minimum and recommended hardware specifications for running the workshop exercises]
 
-## Prerequisites
+</details>
+
+<details>
+<summary>## Prerequisites</summary>
 
 - [TBD - Required programming languages and proficiency levels]
 - [TBD - Machine learning and deep learning background requirements]
@@ -52,6 +56,8 @@ cd mastering_llms_workshop_dhs2025
 - [TBD - Mathematical foundations required (linear algebra, statistics, etc.)]
 - [TBD - Understanding of neural networks and deep learning concepts]
 - [TBD - Prior experience with NLP concepts]
+
+</details>
 
 ## Previous Workshops
 
@@ -80,3 +86,7 @@ If you use materials from this workshop in your research or projects, please cit
 ## Contact
 
 For questions about the workshop content or materials, please [open an issue](https://github.com/raghavbali/mastering_llms_workshop_dhs2025/issues) in this repository.
+
+**Author:**
+- 💼 **LinkedIn:** www.linkedin.com/in/baliraghav
+- 🌐 **Website:** https://raghavbali.github.io/
