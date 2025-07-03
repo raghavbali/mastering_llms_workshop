@@ -1,0 +1,143 @@
+# LLM.txt - Repository Status and Documentation
+
+## Repository Overview
+**Repository:** mastering_llms_workshop_dhs2025
+**Purpose:** Full Day Workshop on Mastering LLMs
+**License:** GNU General Public License v3.0
+
+## Current Repository Structure
+```
+mastering_llms_workshop_dhs2025/
+├── README.md                    # Basic repository description
+├── LICENSE                      # GPL v3.0 license
+├── .gitignore                   # Comprehensive Python gitignore
+├── copilot-instructions.md      # Development guidelines and best practices
+└── llm.txt                      # This documentation file
+```
+
+## Development Setup and Requirements
+
+### Python Requirements
+- **Minimum Version:** Python 3.11+
+- **Dependency Management:** Poetry (required)
+- **Development Environment:** Jupyter Lab (preferred for workshop content)
+
+### Key Technologies and Frameworks
+- Poetry for dependency management
+- Jupyter Lab for interactive development
+- Python 3.11+ for modern language features
+
+### Installation Instructions
+Currently, the repository is in initial setup phase. Once workshop modules are added:
+
+1. Ensure Python 3.11+ is installed
+2. Install Poetry if not already available:
+   ```bash
+   curl -sSL https://install.python-poetry.org | python3 -
+   ```
+3. Clone the repository:
+   ```bash
+   git clone https://github.com/raghavbali/mastering_llms_workshop_dhs2025.git
+   cd mastering_llms_workshop_dhs2025
+   ```
+4. Install dependencies (when pyproject.toml is added):
+   ```bash
+   poetry install
+   ```
+5. Activate the virtual environment:
+   ```bash
+   poetry shell
+   ```
+6. Launch Jupyter Lab:
+   ```bash
+   jupyter lab
+   ```
+
+## Workshop Structure (Planned)
+The workshop will follow a modular structure with the following planned components:
+
+### Module Organization
+- **01_foundations/**: Introduction to LLMs and basic concepts
+- **02_prompt_engineering/**: Prompt design and optimization techniques
+- **03_fine_tuning/**: Model customization and training
+- **04_deployment/**: Production deployment considerations
+- **utils/**: Shared utilities and helper functions
+
+### File Naming Conventions
+- Jupyter notebooks: `##_descriptive_name.ipynb`
+- Python modules: `snake_case_naming.py`
+- Documentation: `descriptive-name.md`
+
+## Current Status
+
+### Completed Items
+- [x] Repository initialization
+- [x] License setup (GPL v3.0)
+- [x] Comprehensive .gitignore for Python projects
+- [x] Basic README.md structure
+- [x] Copilot instructions for development guidelines
+- [x] Initial llm.txt documentation
+
+### Pending Items
+- [ ] Poetry project configuration (pyproject.toml)
+- [ ] Workshop module structure creation
+- [ ] Jupyter notebook templates
+- [ ] Core utility functions
+- [ ] Requirements and dependencies definition
+- [ ] Detailed README.md with workshop overview
+- [ ] Sample datasets and resources
+- [ ] Testing framework setup
+
+## Documentation Guidelines
+
+### Maintenance Requirements
+- Update this llm.txt file with each significant change
+- Keep README.md synchronized with workshop structure
+- Document all new dependencies and their purposes
+- Include installation and setup instructions
+- Track workshop progression and learning objectives
+
+### Content Standards
+- Use clear, educational language appropriate for workshop participants
+- Include practical examples and hands-on exercises
+- Provide both theoretical background and implementation details
+- Support multiple skill levels and learning paths
+
+## Resource Requirements
+
+### Computational Needs
+- Standard laptop/desktop for basic workshop modules
+- GPU access recommended for fine-tuning exercises
+- Cloud alternatives for resource-intensive tasks
+- Internet connection for accessing pre-trained models
+
+### Software Dependencies
+- Python 3.11+ runtime
+- Poetry package manager
+- Jupyter Lab environment
+- Git for version control
+- Additional ML/AI libraries (to be specified)
+
+## Contributing Guidelines
+
+### Development Workflow
+1. Follow the guidelines in copilot-instructions.md
+2. Use Poetry for all dependency management
+3. Create meaningful, descriptive filenames
+4. Update documentation with code changes
+5. Test workshop materials before submitting
+6. Keep commits atomic and well-documented
+
+### Quality Standards
+- Ensure all code works with Python 3.11+
+- Use type hints and proper documentation
+- Include practical examples in all workshop modules
+- Validate end-to-end workshop experience
+- Maintain consistency across all materials
+
+## Contact and Support
+For questions about this workshop or repository structure, please refer to the main repository documentation or open an issue on GitHub.
+
+---
+**Last Updated:** Initial creation
+**Next Review:** Upon addition of first workshop module
