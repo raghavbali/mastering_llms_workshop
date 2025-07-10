@@ -98,6 +98,15 @@ workshop_modules/
   - Installation instructions are modified
   - Learning objectives are updated
 
+#### Module-wise README File
+- Always analyze code files (.py, .ipynb) in the module and understand key topics covered
+- The module specific README.md should cover:
+  - A title of the module
+  - A short description of the module
+  - A table of contents with hyperlinks to all notebooks. The hyperlink should be named in a meaningful way. 
+  - A block quote at the end mention which model was used to generate the README with a timestamp
+  - A horizontal line to close it off.
+
 ### Documentation Standards
 - Use clear, concise language
 - Include code examples where relevant
