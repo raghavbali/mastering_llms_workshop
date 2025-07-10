@@ -4,14 +4,14 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
 
 ## Workshop Details
 
-📅 **Date:** [TBD - Workshop Date]  
+📅 **Date:** August 23rd 2025  
 📍 **Venue:** [TBD - Workshop Venue]  
-🎟️ **Registration:** [TBD - Ticket Purchase Link]
+🎟️ **Registration:** [Workshop Link](https://www.analyticsvidhya.com/datahacksummit-2025/workshops/mastering-llms-training-fine-tuning-and-best-practices-2)
 
 ## Modules
 
-### Module 01: Language Modeling
-[TBD - Description of language modeling fundamentals, statistical approaches, and foundational concepts that underpin modern LLMs]
+### Module 01: Text Representation
+This module covers the fundamentals of text representation and contextual embeddings using transformers.
 
 ### Module 02: LLM Building Blocks
 [TBD - Description of transformer architecture, attention mechanisms, embeddings, and core components that make up large language models]
