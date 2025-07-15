@@ -11,19 +11,27 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
 ## Modules
 
 ### Module 01: Text Representation
-This module covers the fundamentals of text representation and contextual embeddings using transformers.
+- Fundamentals of text representation
+- Contextual embeddings using transformers.
 
 ### Module 02: LLM Building Blocks
-[TBD - Description of transformer architecture, attention mechanisms, embeddings, and core components that make up large language models]
+- Internals of the transformer architecture: attention mechanism, embeddings, and core components that make up large language models
+- HuggingFace pipelines for different tasks a language model can handle: classification, text generation, etc. 
+- Fine-tune a pretrained GPT2 for code-generation.
 
-### Module 03: Language Modeling at Scale
-[TBD - Description of scaling laws, distributed training, model parallelism, and techniques for training massive language models]
+### Module 03: Instruction Tuning and Alignment
+- Instruction Tuning
+- LLM alignment or Performance Tuning
 
-### Module 04: LLM Ops
-[TBD - Description of deployment strategies, monitoring, optimization, serving infrastructure, and operational best practices for LLMs in production]
+### Module 04: LLM optimizations
+- PEFT
+- Memory Efficient Loading
+- Quantization
 
-### Module 05: Next Frontier
-[TBD - Description of emerging trends, future directions, multimodal models, and cutting-edge research in the LLM space]
+### Module 05: LLM Ops
+- RAG
+- LangChain
+- DSpy
 
 <details>
 <summary>## Setup Instructions</summary>
@@ -40,34 +48,28 @@ cd mastering_llms_workshop_dhs2025
 ```
 
 ### Environment Setup
-[TBD - Detailed instructions for setting up the development environment, including Python version, required packages, and any cloud services]
+- Notebooks are self-contained for quick setup
+- Modules aimed at low-resource setups/colab compatible
 
-### Hardware Requirements
-[TBD - Minimum and recommended hardware specifications for running the workshop exercises]
 
 </details>
 
 <details>
 <summary>## Prerequisites</summary>
 
-- [TBD - Required programming languages and proficiency levels]
-- [TBD - Machine learning and deep learning background requirements]
-- [TBD - Familiarity with specific frameworks or tools]
-- [TBD - Mathematical foundations required (linear algebra, statistics, etc.)]
-- [TBD - Understanding of neural networks and deep learning concepts]
-- [TBD - Prior experience with NLP concepts]
+- Familiarity with python, pytorch and python ecosystem
+- Understanding of neural networks and deep learning concepts
 
 </details>
 
 ## Previous Workshops
 
-### Workshop 1
-**Title:** [TBD - Previous Workshop Title]  
-**Link:** [TBD - Link to previous workshop repository or materials]
+- **2024: [Unleashing LLMs: Training, Fine-Tuning and Evaluating](https://www.analyticsvidhya.com/datahacksummit-2024/workshops/unleashing-llms-training-finetuning-and-evaluating)**  
+  - [Code/Github Repo](https://github.com/raghavbali/llm_workshop?tab=readme-ov-file)
 
-### Workshop 2
-**Title:** [TBD - Previous Workshop Title]  
-**Link:** [TBD - Link to previous workshop repository or materials]
+- **2023: [Unleashing LLMs: Training, Fine-Tuning and Evaluating](https://www.analyticsvidhya.com/dhs-2023/workshop/natural-language-processing-using-generative-models/)**  
+  - [Code/Github Repo](https://github.com/raghavbali/llm_workshop_dhs23)
+
 
 ## Citation
 
