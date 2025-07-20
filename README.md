@@ -8,6 +8,8 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
 📍 **Venue:** [TBD - Workshop Venue]  
 🎟️ **Registration:** [Workshop Link](https://www.analyticsvidhya.com/datahacksummit-2025/workshops/mastering-llms-training-fine-tuning-and-best-practices-2)
 
+<img src="./assets/llm_training_lifecycle.png">
+
 ## Modules
 
 ### Module 01: Text Representation
