@@ -18,20 +18,19 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
 - Internals of the transformer architecture: attention mechanism, embeddings, and core components that make up large language models
 - HuggingFace pipelines for different tasks a language model can handle: classification, text generation, etc. 
 - Fine-tune a pretrained GPT2 for code-generation.
+- LLM Optimizations:
+  - PEFT
+  - Quantization/LoRA
 
 ### Module 03: Instruction Tuning and Alignment
 - Instruction Tuning
-- LLM alignment or Performance Tuning
-
-### Module 04: LLM optimizations
-- PEFT
-- Memory Efficient Loading
-- Quantization
+- LLM alignment or Performance Tuning using RLHF/PPO
 
 ### Module 05: LLM Ops
 - RAG
 - LangChain
 - DSpy
+- MCP
 
 <details>
 <summary>## Setup Instructions</summary>
@@ -43,8 +42,6 @@ Before attending the workshop, please ensure you have the following installed:
 # Clone the repository
 git clone https://github.com/raghavbali/mastering_llms_workshop_dhs2025.git
 cd mastering_llms_workshop_dhs2025
-
-# [TBD - Additional setup instructions will be added]
 ```
 
 ### Environment Setup
