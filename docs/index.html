@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Training Lifecycle - 2024 Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container py-16">
+        <!-- Header will be populated by JavaScript -->
+        <header class="text-center mb-16" id="header-section">
+        </header>
+        <!-- Summary Diagram will be populated by JavaScript -->
+        <section class="summary-section mb-16" id="summary-section">
+        </section>
+        <!-- Timeline will be populated by JavaScript (moved after summary) -->
+        <section class="timeline-section mt-16 mb-16" id="timeline-section">
+        </section>
+        <!-- Detailed Phases will be populated by JavaScript -->
+        <section class="phases-section" id="phases-section">
+        </section>
+    </main>
+    <script>
+        // Global variable to hold configuration data
+        let LLM_LIFECYCLE_CONFIG = {};
+        // Function to load configuration from external JSON file (works on GitHub Pages/Jekyll)
+        async function loadConfiguration() {
+            try {
+                // Use relative path for GitHub Pages compatibility
+                const response = await fetch('llm-lifecycle.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                LLM_LIFECYCLE_CONFIG = await response.json();
+                console.log('Configuration loaded from llm-lifecycle.json');
+            } catch (error) {
+                console.error('Error loading configuration:', error);
+                // Fallback configuration in case external file fails to load
+                LLM_LIFECYCLE_CONFIG = {
+                    header: {
+                        title: "Large Language Model Training Lifecycle",
+                        subtitle: "Complete overview of modern LLM training methods and approaches (2024)",
+                        themeToggle: {
+                            text: "🌓 Toggle Theme",
+                            id: "themeToggle"
+                        }
+                    },
+                    summary: {
+                        title: "📊 Training Pipeline Overview",
+                        stages: []
+                    },
+                    phases: {
+                        title: "<br/>🔍 Detailed Training Phases",
+                        phases: []
+                    },
+                    timeline: {
+                        title: "📅 Evolution Timeline",
+                        items: []
+                    }
+                };
+                console.log('Using fallback configuration');
+            }
+        }
+        
+        // Render Functions
+        function renderHeader() {
+            const headerSection = document.getElementById('header-section');
+            const config = LLM_LIFECYCLE_CONFIG.header;
+            headerSection.innerHTML = `
+                <div class="header-flex-row">
+                    <div class="header-title-group">
+                        <h1 class="gradient-title">${config.title}</h1>
+                        <p class="subtitle">${config.subtitle}</p>
+                    </div>
+                    <label class="theme-switch">
+                        <input type="checkbox" id="${config.themeToggle.id}" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            `;
+        }
+        function renderSummary() {
+            const summarySection = document.getElementById('summary-section');
+            const config = LLM_LIFECYCLE_CONFIG.summary;
+            
+            let stagesHTML = '';
+            config.stages.forEach((stage, index) => {
+                if (stage.type === 'branch-group') {
+                    stagesHTML += `
+                        <div class="summary-branches">
+                            <div class="branch-group">
+                                ${stage.stages.map(s => `
+                                    <div class="summary-stage" data-stage="${s.id}">
+                                        <div class="summary-box">
+                                            <span class="summary-icon">${s.icon}</span>
+                                            <span class="summary-text">${s.text}</span>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    stagesHTML += `
+                        <div class="summary-stage" data-stage="${stage.id}">
+                            <div class="summary-box ${stage.special || ''}">
+                                <span class="summary-icon">${stage.icon}</span>
+                                <span class="summary-text">${stage.text}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                if (index < config.stages.length - 1) {
+                    stagesHTML += '<div class="summary-arrow">→</div>';
+                }
+            });
+            
+            summarySection.innerHTML = `
+                <h2 class="section-title">${config.title}</h2>
+                <div class="summary-diagram">
+                    ${stagesHTML}
+                </div>
+            `;
+        }
+        function renderInfoRows(info) {
+            // Add target and rel to all anchor tags in the value, and add nbsanity/nbviewer badges for notebook links
+            function patchLinks(html) {
+                // Add target and rel
+                let patched = html.replace(/<a\s/gi, '<a target="_blank" rel="noopener" ');
+                // Prefix notebook links with 'docs/' if not already present
+                patched = patched.replace(/<a ([^>]*?)href=["'](?!https?:|\/|docs\/)([^"'>]+\.ipynb)["']/gi, '<a $1href="docs/$2"');
+                // Add nbsanity and nbviewer badges after notebook links
+                patched = patched.replace(/<a ([^>]*?)href=["']([^"'>]+\.ipynb)["'][^>]*>(.*?)<\/a>/gi, function(match, attrs, href, text) {
+                    // Remove leading './' or 'docs/' for GitHub path
+                    let githubPath = href.replace(/^\.\/?|^docs\//, '');
+                    // Compose GitHub repo path (assume main branch)
+                    const githubBase = 'raghavbali/mastering_llms_workshop_dhs2025/main/';
+                    // nbsanity
+                    const nbsanity = `<a target="_blank" rel="noopener" href="https://nbsanity.com/view/github/${githubBase}${githubPath}"><img src='https://img.shields.io/badge/Open%20in-nbsanity-blue?logo=github' alt='Open in nbsanity' style='height:1em;vertical-align:middle;'/></a>`;
+                    // nbviewer
+                    const nbviewer = `<a target="_blank" rel="noopener" href="https://nbviewer.org/github/${githubBase}${githubPath}"><img src='https://img.shields.io/badge/Open%20in-nbviewer-orange?logo=jupyter' alt='Open in nbviewer' style='height:1em;vertical-align:middle;'/></a>`;
+                    // Original link + badges
+                    return `${match} ${nbsanity} ${nbviewer}`;
+                });
+                return patched;
+            }
+            return info.map(item => `
+                <div class="info-row">
+                    <span class="info-label">${item.label}</span>
+                    <span class="info-value">${patchLinks(item.value)}</span>
+                </div>
+            `).join('');
+        }
+        function renderAlignmentMethods(methods) {
+            const tabsHTML = methods.map(method => `
+                <button class="method-tab ${method.active ? 'active' : ''}" data-method="${method.id}">${method.name}</button>
+            `).join('');
+            const panelsHTML = methods.map(method => `
+                <div class="method-panel ${method.active ? 'active' : ''}" id="${method.id}">
+                    <div class="method-header">
+                        <h6 class="method-name">${method.fullName}</h6>
+                        <div class="method-badges">
+                            <span class="year-badge ${method.yearClass || ''}">${method.year}</span>
+                            <span class="complexity-badge ${method.complexity}">${method.complexityText}</span>
+                        </div>
+                    </div>
+                    <div class="branch-card ${method.class}">
+                        <div class="phase-info">
+                            ${renderInfoRows(method.info)}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            return `
+                <div class="alignment-methods">
+                    <div class="method-tabs">
+                        ${tabsHTML}
+                    </div>
+                    <div class="method-content">
+                        ${panelsHTML}
+                    </div>
+                </div>
+            `;
+        }
+        function renderPhases() {
+            const phasesSection = document.getElementById('phases-section');
+            const config = LLM_LIFECYCLE_CONFIG.phases;
+            
+            let phasesHTML = `<h2 class="section-title">${config.title}</h2>`;
+            
+            config.phases.forEach(phase => {
+                const isCollapsed = phase.collapsed !== undefined ? phase.collapsed : false;
+                const collapseId = `collapse-${phase.id}`;
+                
+                phasesHTML += `
+                    <div id="${phase.id}" class="phase-container">
+                        <div class="phase-header collapsible-header" onclick="toggleCollapse('${collapseId}')">
+                            <div class="phase-header-content">
+                                <h3 class="phase-title">${phase.title}</h3>
+                                <span class="phase-badge ${phase.badge.class}">${phase.badge.text}</span>
+                            </div>
+                            <span class="collapse-toggle" id="toggle-${collapseId}">${isCollapsed ? '▶' : '▼'}</span>
+                        </div>
+                        <div class="phase-content collapsible-content ${isCollapsed ? 'collapsed' : ''}" id="${collapseId}">
+                `;
+                if (phase.description) {
+                    phasesHTML += `
+                        <div class="branching-description">
+                            <p>${phase.description}</p>
+                        </div>
+                    `;
+                }
+                if (phase.branches) {
+                    phasesHTML += '<div class="branches-container">';
+                    
+                    phase.branches.forEach(branch => {
+                        phasesHTML += `<div class="branch-path">`;
+                        phasesHTML += `<h4 class="branch-title">${branch.title}</h4>`;
+                        
+                        if (branch.info) {
+                            phasesHTML += `
+                                <div class="branch-card ${branch.class}">
+                                    <div class="phase-info">
+                                        ${renderInfoRows(branch.info)}
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        if (branch.steps) {
+                            branch.steps.forEach(step => {
+                                phasesHTML += `
+                                    <div class="instruction-step">
+                                        <h5 class="step-title">${step.title}</h5>
+                                `;
+                                
+                                if (step.info) {
+                                    phasesHTML += `
+                                        <div class="branch-card ${step.class}">
+                                            <div class="phase-info">
+                                                ${renderInfoRows(step.info)}
+                                            </div>
+                                        </div>
+                                    `;
+                                }
+                                if (step.hasMethodTabs && step.methods) {
+                                    phasesHTML += renderAlignmentMethods(step.methods);
+                                }
+                                
+                                phasesHTML += '</div>';
+                            });
+                        }
+                        
+                        phasesHTML += '</div>';
+                    });
+                    
+                    phasesHTML += '</div>';
+                } else if (phase.info) {
+                    phasesHTML += `
+                        <div class="phase-card">
+                            <div class="phase-info">
+                                ${renderInfoRows(phase.info)}
+                            </div>
+                        </div>
+                    `;
+                }
+                phasesHTML += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            phasesSection.innerHTML = phasesHTML;
+        }
+        function renderTimeline() {
+            const timelineSection = document.getElementById('timeline-section');
+            const config = LLM_LIFECYCLE_CONFIG.timeline;
+            
+            const timelineHTML = config.items.map(item => `
+                <div class="timeline-item">
+                    <div class="timeline-year">${item.year}</div>
+                    <div class="timeline-content">${item.content}</div>
+                </div>
+            `).join('');
+            
+            timelineSection.innerHTML = `
+                <h2 class="section-title">${config.title}</h2>
+                <div class="timeline">
+                    ${timelineHTML}
+                </div>
+            `;
+        }
+        
+        // Collapse/Expand functionality
+        function toggleCollapse(elementId) {
+            const content = document.getElementById(elementId);
+            const toggle = document.getElementById(`toggle-${elementId}`);
+            
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                toggle.textContent = '▼';
+            } else {
+                content.classList.add('collapsed');
+                toggle.textContent = '▶';
+            }
+        }
+        
+        // Event handlers for interactive elements
+        function setupEventHandlers() {
+            // Method tab switching
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('method-tab')) {
+                    const methodId = e.target.getAttribute('data-method');
+                    const parentContainer = e.target.closest('.alignment-methods');
+                    parentContainer.querySelectorAll('.method-tab').forEach(tab => tab.classList.remove('active'));
+                    parentContainer.querySelectorAll('.method-panel').forEach(panel => panel.classList.remove('active'));
+                    e.target.classList.add('active');
+                    parentContainer.querySelector(`#${methodId}`).classList.add('active');
+                }
+                // Theme toggle (if you have the theme toggle functionality)
+                if (e.target.id === 'themeToggle') {
+                    // Add your theme toggle logic here
+                    console.log('Theme toggle clicked');
+                }
+                // Summary stage click: scroll to relevant phase section
+                const stage = e.target.closest('.summary-stage');
+                if (stage && stage.dataset.stage) {
+                    const phaseSection = document.getElementById(stage.dataset.stage);
+                    if (phaseSection) {
+                        phaseSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        }
+        
+        // Initialize the page
+        async function init() {
+            // Load configuration first
+            await loadConfiguration();
+            
+            // Then render all sections
+            renderHeader();
+            renderSummary();
+            renderTimeline(); // Now renders after summary
+            renderPhases();
+            setupEventHandlers();
+        }
+        
+        // Load the page when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+    <script src="app_1.js"></script>
+    
+    <style>
+        /* Additional CSS for collapsible functionality */
+        .collapsible-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: background-color 0.2s ease;
+        }
+        .collapsible-header:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .phase-header-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .collapse-toggle {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #64748b;
+            transition: transform 0.2s ease;
+        }
+        .collapsible-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+        .collapsible-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin-bottom: 0;
+        }
+        .phase-header {
+            margin-bottom: 0;
+        }
+        .phase-title {
+            margin: 0;
+        }
+        /* --- Custom header flex for theme toggle --- */
+        .header-flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .header-title-group {
+            flex: 1 1 auto;
+            min-width: 250px;
+        }
+        .theme-toggle-btn {
+            align-self: flex-start;
+            margin-top: 0.5rem;
+            margin-left: auto;
+            /* visually separate from title */
+        }
+        /* --- Add gap between summary and timeline --- */
+        .summary-section {
+            margin-bottom: 3.5rem !important;
+        }
+        .timeline-section {
+            margin-top: 3.5rem !important;
+        }
+        /* --- Theme switch toggle styles --- */
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+            margin-left: auto;
+            margin-top: 0.5rem;
+        }
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, #e0e7ef 0%, #64748b 100%);
+            border-radius: 34px;
+            transition: background 0.3s;
+        }
+        .slider:before {
+            position: absolute;
+            content: '';
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 3px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .theme-switch input:checked + .slider {
+            background: linear-gradient(90deg, #334155 0%, #0f172a 100%);
+        }
+        .theme-switch input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+        .slider {
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        /* Optional: add a moon/sun icon */
+        .theme-switch .slider:after {
+            content: '\1F319'; /* moon by default */
+            position: absolute;
+            right: 8px;
+            top: 4px;
+            font-size: 1rem;
+            color: #64748b;
+            transition: content 0.3s;
+        }
+        .theme-switch input:checked + .slider:after {
+            content: '\2600'; /* sun when checked */
+            color: #facc15;
+        }
+    </style>
+</body>
+</html>
