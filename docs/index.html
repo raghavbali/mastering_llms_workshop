@@ -7,20 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="container py-16">
-        <!-- Header will be populated by JavaScript -->
-        <header class="text-center mb-16" id="header-section">
-        </header>
-        <!-- Summary Diagram will be populated by JavaScript -->
-        <section class="summary-section mb-16" id="summary-section">
-        </section>
-        <!-- Timeline will be populated by JavaScript (moved after summary) -->
-        <section class="timeline-section mt-16 mb-16" id="timeline-section">
-        </section>
-        <!-- Detailed Phases will be populated by JavaScript -->
-        <section class="phases-section" id="phases-section">
-        </section>
-    </main>
+    <div id="header-section" class="container" style="margin-top:2.5rem;"></div>
+    <div id="summary-section" class="container" style="margin-top:2.5rem;"></div>
+    <div id="timeline-section" class="container" style="margin-top:2.5rem;"></div>
+    <div id="phases-section" class="container" style="margin-top:2.5rem;"></div>
+    <div id="book-promo-section" class="container" style="margin-top:2.5rem;"></div>
+    <script src="app_1.js"></script>
     <script>
         // Global variable to hold configuration data
         let LLM_LIFECYCLE_CONFIG = {};
@@ -73,35 +65,72 @@
                         <h1 class="gradient-title">${config.title}</h1>
                         <p class="subtitle">${config.subtitle}</p>
                     </div>
-                    <label class="theme-switch">
-                        <input type="checkbox" id="${config.themeToggle.id}" />
-                        <span class="slider"></span>
-                    </label>
+                    <div class="header-actions" style="display:flex;align-items:center;gap:1.2rem;">
+                        <a href="https://raghavbali.github.io" class="website-link" target="_blank" rel="noopener" title="raghavbali.github.io" style="font-weight:500;display:inline-flex;align-items:center;justify-content:center;background:var(--color-surface);border-radius:8px;padding:0.5em 0.8em;"><span style="font-size:1.3em;">🌐</span></a>
+                        <a href="https://github.com/raghavbali/mastering_llms_workshop_dhs2025" class="github-link" target="_blank" rel="noopener" title="GitHub" style="display:inline-flex;align-items:center;justify-content:center;background:var(--color-surface);border-radius:8px;padding:0.5em 0.8em;"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width:24px;height:24px;vertical-align:middle;"/></a>
+                        <button id="github-star-btn" style="background:var(--color-primary);color:#fff;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;font-size:1em;display:inline-flex;align-items:center;gap:0.5em;">
+                          <span style="font-size:1.1em;">★</span> Star Repo
+                        </button>
+                        <span id="github-star-count" style="background:#eee;border-radius:12px;padding:2px 8px;font-size:0.9em;">★ --</span>
+                        <label class="theme-switch" style="margin-left:0.5em;">
+                            <input type="checkbox" id="${config.themeToggle.id}" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
                 </div>
             `;
+            // Fetch GitHub star count
+            fetch('https://api.github.com/repos/raghavbali/mastering_llms_workshop_dhs2025')
+              .then(r => r.json())
+              .then(data => {
+                if (data.stargazers_count !== undefined) {
+                  document.getElementById('github-star-count').textContent = `★ ${data.stargazers_count}`;
+                }
+              });
+            // Star button (opens repo star page)
+            setTimeout(() => {
+              const btn = document.getElementById('github-star-btn');
+              if (btn) {
+                btn.onclick = () => {
+                  window.open('https://github.com/raghavbali/mastering_llms_workshop_dhs2025/stargazers', '_blank');
+                };
+              }
+            }, 500);
         }
         function renderSummary() {
             const summarySection = document.getElementById('summary-section');
             const config = LLM_LIFECYCLE_CONFIG.summary;
-            
+            // Use a common Amazon URL from config or fallback
+            const amazonUrl = (LLM_LIFECYCLE_CONFIG.book && LLM_LIFECYCLE_CONFIG.book.amazon_url) ? LLM_LIFECYCLE_CONFIG.book.amazon_url : '#AMAZON_URL';
             let stagesHTML = '';
             config.stages.forEach((stage, index) => {
                 if (stage.type === 'branch-group') {
                     stagesHTML += `
                         <div class="summary-branches">
                             <div class="branch-group">
-                                ${stage.stages.map(s => `
-                                    <div class="summary-stage" data-stage="${s.id}">
-                                        <div class="summary-box">
-                                            <span class="summary-icon">${s.icon}</span>
-                                            <span class="summary-text">${s.text}</span>
+                                ${stage.stages.map(s => {
+                                    // For Phase 2 branches, force data-stage to phase2-path-a, phase2-path-b, phase2-alignment
+                                    let branchDataStage = s.id;
+                                    if (s.id) {
+                                        const idLower = s.id.toLowerCase();
+                                        if (idLower === 'path-a') branchDataStage = 'phase2-path-a';
+                                        else if (idLower === 'path-b') branchDataStage = 'phase2-path-b';
+                                        else if (idLower.includes('alignment')) branchDataStage = 'phase2-alignment';
+                                    }
+                                    return `
+                                        <div class="summary-stage" data-stage="${branchDataStage}">
+                                            <div class="summary-box">
+                                                <span class="summary-icon">${s.icon}</span>
+                                                <span class="summary-text">${s.text}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                `).join('')}
+                                    `;
+                                }).join('')}
                             </div>
                         </div>
                     `;
                 } else {
+                    // For main phase sections, keep as is
                     stagesHTML += `
                         <div class="summary-stage" data-stage="${stage.id}">
                             <div class="summary-box ${stage.special || ''}">
@@ -123,6 +152,22 @@
                     ${stagesHTML}
                 </div>
             `;
+            // Add the promo row just below the overview box, not inside it
+            const promoRow = document.createElement('div');
+            promoRow.className = 'overview-promo-row';
+            promoRow.innerHTML = `
+              <div class="overview-promo-inner">
+                <span class="overview-promo-text">
+                  <span style="font-size:1.3em;">❤️</span>
+                  <span>For more deeper insights, check out my very approachable new book on Generative AI</span>
+                </span>
+                <span class="overview-promo-actions">
+                  <a href="${amazonUrl}" target="_blank" rel="noopener" class="overview-promo-btn overview-promo-btn--amazon">Buy on Amazon</a>
+                  <a href="#book-promo-section" class="overview-promo-btn overview-promo-btn--outline">More Details</a>
+                </span>
+              </div>
+            `;
+            summarySection.parentNode.insertBefore(promoRow, summarySection.nextSibling);
         }
         function renderInfoRows(info) {
             // Add target and rel to all anchor tags in the value, and add nbsanity/nbviewer badges for notebook links
@@ -193,6 +238,9 @@
             config.phases.forEach(phase => {
                 const isCollapsed = phase.collapsed !== undefined ? phase.collapsed : false;
                 const collapseId = `collapse-${phase.id}`;
+                // For Phase 2, add unique IDs to each branch for linking
+                let branchIdPrefix = '';
+                if (phase.id === 'phase2') branchIdPrefix = 'phase2-';
                 
                 phasesHTML += `
                     <div id="${phase.id}" class="phase-container">
@@ -213,12 +261,21 @@
                     `;
                 }
                 if (phase.branches) {
-                    phasesHTML += '<div class="branches-container">';
-                    
+                    // --- MODIFIED: Make branches stack vertically and full width ---
+                    phasesHTML += '<div class="branches-container vertical">';
                     phase.branches.forEach(branch => {
-                        phasesHTML += `<div class="branch-path">`;
+                        // Add unique id for each branch in phase2 for linking
+                        let branchId = '';
+                        if (branchIdPrefix) {
+                          // Force branchId to phase2-path-a, phase2-path-b, phase2-alignment for correct linking
+                          const idLower = (branch.id || branch.title || '').toLowerCase();
+                          if (idLower === 'path-a') branchId = 'phase2-path-a';
+                          else if (idLower === 'path-b') branchId = 'phase2-path-b';
+                          else if (idLower.includes('alignment')) branchId = 'phase2-alignment';
+                          else branchId = `${branchIdPrefix}${idLower.replace(/[^a-z0-9]+/g, '-')}`;
+                        }
+                        phasesHTML += `<div class="branch-path"${branchId ? ` id="${branchId}"` : ''}>`;
                         phasesHTML += `<h4 class="branch-title">${branch.title}</h4>`;
-                        
                         if (branch.info) {
                             phasesHTML += `
                                 <div class="branch-card ${branch.class}">
@@ -234,7 +291,6 @@
                                     <div class="instruction-step">
                                         <h5 class="step-title">${step.title}</h5>
                                 `;
-                                
                                 if (step.info) {
                                     phasesHTML += `
                                         <div class="branch-card ${step.class}">
@@ -247,14 +303,11 @@
                                 if (step.hasMethodTabs && step.methods) {
                                     phasesHTML += renderAlignmentMethods(step.methods);
                                 }
-                                
                                 phasesHTML += '</div>';
                             });
                         }
-                        
                         phasesHTML += '</div>';
                     });
-                    
                     phasesHTML += '</div>';
                 } else if (phase.info) {
                     phasesHTML += `
@@ -291,6 +344,23 @@
                 </div>
             `;
         }
+        function renderBookPromo() {
+            const promoSection = document.getElementById('book-promo-section');
+            const amazonUrl = (LLM_LIFECYCLE_CONFIG.book && LLM_LIFECYCLE_CONFIG.book.amazon_url) ? LLM_LIFECYCLE_CONFIG.book.amazon_url : '#AMAZON_URL';
+            promoSection.innerHTML = `
+                <div id="book-promo" class="book-promo" style="margin-top:2.5rem;display:flex;align-items:center;gap:2rem;justify-content:center;flex-wrap:wrap;background:var(--color-surface);border-radius:12px;box-shadow:var(--shadow-md);padding:2rem 1.5rem;">
+                    <img src="assets/book_placeholder.png" alt="Book Cover" style="width:120px;height:auto;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);background:#f5f5f5;object-fit:contain;"/>
+                    <div style="flex:1;min-width:220px;">
+                        <h2 style="margin:0 0 0.5rem 0;font-size:1.5em;">Your Book Title Here</h2>
+                        <p style="margin:0 0 1rem 0;font-size:1.1em;">A practical guide to LLM fine-tuning, packed with hands-on recipes and real-world insights. <span style='color:var(--color-primary);font-weight:600;'>Inspire your LLM journey!</span></p>
+                        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+                            <a href="${amazonUrl}" target="_blank" rel="noopener" style="background:#ff9900;color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(255,153,0,0.08);">Buy on Amazon</a>
+                            <a href="https://github.com/raghavbali/mastering_llms_workshop_dhs2025" target="_blank" rel="noopener" style="background:#24292f;color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(36,41,47,0.08);">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
         
         // Collapse/Expand functionality
         function toggleCollapse(elementId) {
@@ -318,15 +388,20 @@
                     e.target.classList.add('active');
                     parentContainer.querySelector(`#${methodId}`).classList.add('active');
                 }
-                // Theme toggle (if you have the theme toggle functionality)
-                if (e.target.id === 'themeToggle') {
-                    // Add your theme toggle logic here
-                    console.log('Theme toggle clicked');
-                }
-                // Summary stage click: scroll to relevant phase section
+                // Summary stage click: scroll to relevant phase or branch section
                 const stage = e.target.closest('.summary-stage');
                 if (stage && stage.dataset.stage) {
-                    const phaseSection = document.getElementById(stage.dataset.stage);
+                    let targetId = stage.dataset.stage;
+                    // If it's a phase2 branch, scroll to the branch id
+                    if (targetId.startsWith('phase2-')) {
+                        const branchSection = document.getElementById(targetId);
+                        if (branchSection) {
+                            branchSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            return;
+                        }
+                    }
+                    // Otherwise scroll to phase section
+                    const phaseSection = document.getElementById(targetId);
                     if (phaseSection) {
                         phaseSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
@@ -338,19 +413,19 @@
         async function init() {
             // Load configuration first
             await loadConfiguration();
-            
+
             // Then render all sections
             renderHeader();
             renderSummary();
-            renderTimeline(); // Now renders after summary
-            renderPhases();
+            renderTimeline(); 
+            renderPhases(); // Move phases before timeline
+            renderBookPromo();
             setupEventHandlers();
         }
         
         // Load the page when DOM is ready
         document.addEventListener('DOMContentLoaded', init);
     </script>
-    <script src="app_1.js"></script>
     
     <style>
         /* Additional CSS for collapsible functionality */
@@ -477,6 +552,79 @@
         .theme-switch input:checked + .slider:after {
             content: '\2600'; /* sun when checked */
             color: #facc15;
+        }
+        .overview-promo-row {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          margin: 1.5rem 0 0 0;
+        }
+        .overview-promo-inner {
+          max-width: 1100px;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1.5rem;
+          flex-wrap: wrap;
+          padding: 0 2.5rem;
+        }
+        .overview-promo-text {
+          font-size: 1.1em;
+          display: flex;
+          align-items: center;
+          gap: 0.5em;
+        }
+        .overview-promo-actions {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+        }
+        .overview-promo-btn {
+          font-weight: 600;
+          text-decoration: none;
+          border-radius: 6px;
+          padding: 8px 18px;
+          font-size: 1em;
+          box-shadow: 0 2px 8px rgba(255,153,0,0.08);
+          border: none;
+          transition: background 0.15s, color 0.15s, border 0.15s;
+          display: inline-block;
+        }
+        .overview-promo-btn--amazon {
+          background: #ff9900;
+          color: #fff;
+        }
+        .overview-promo-btn--outline {
+          background: transparent;
+          color: var(--color-primary);
+          border: 2px solid var(--color-primary);
+          box-shadow: none;
+        }
+        /* --- CSS: Make .branches-container vertical and .branch-path full width --- */
+        .branches-container.vertical {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+        .branch-path {
+          width: 100%;
+          margin-bottom: 0;
+        }
+        @media (max-width: 700px) {
+          .overview-promo-inner {
+            padding: 0 0.5rem;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+          }
+          .overview-promo-actions {
+            width: 100%;
+            justify-content: flex-start;
+          }
+          .branches-container.vertical {
+            gap: 1.2rem;
+          }
         }
     </style>
 </body>

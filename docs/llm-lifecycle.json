@@ -89,7 +89,7 @@
       },
       {
         "id": "branching",
-        "title": "🔀 Phase 2: Post-Pre-training Branching",
+        "title": "🔀 Phase 2: Post Training",
         "badge": {
           "text": "Decision Point",
           "class": "branching"
