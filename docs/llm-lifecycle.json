@@ -26,26 +26,26 @@
         "type": "branch-group",
         "stages": [
           {
-            "id": "task-specific",
+            "id": "branching",
             "icon": "🎯",
             "text": "Task-Specific Fine-tuning"
           },
           {
-            "id": "instruction",
+            "id": "branching",
             "icon": "📝",
             "text": "Instruction Tuning"
           }
         ]
       },
       {
-        "id": "alignment",
+        "id": "branching",
         "icon": "⚖️",
         "text": "Alignment Methods"
       },
       {
-        "id": "production",
+        "id": "applications",
         "icon": "🚀",
-        "text": "Production Model"
+        "text": "Applications"
       }
     ]
   },
@@ -98,6 +98,7 @@
         "description": "After pre-training, models can follow two main paths based on the intended use case:",
         "branches": [
           {
+             "id": "task-specific",
             "title": "🎯 Path A: Task-Specific Fine-tuning",
             "class": "task-specific",
             "info": [
@@ -347,8 +348,8 @@
         ]
       },
       {
-        "id": "production",
-        "title": "🚀 Phase 3: Production & Deployment",
+        "id": "applications",
+        "title": "🚀 Phase 3: LLM Based Applications",
         "badge": {
           "text": "Live System",
           "class": "production"

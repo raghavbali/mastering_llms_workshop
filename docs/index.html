@@ -67,11 +67,7 @@
                     </div>
                     <div class="header-actions" style="display:flex;align-items:center;gap:1.2rem;">
                         <a href="https://raghavbali.github.io" class="website-link" target="_blank" rel="noopener" title="raghavbali.github.io" style="font-weight:500;display:inline-flex;align-items:center;justify-content:center;background:var(--color-surface);border-radius:8px;padding:0.5em 0.8em;"><span style="font-size:1.3em;">🌐</span></a>
-                        <a href="https://github.com/raghavbali/mastering_llms_workshop_dhs2025" class="github-link" target="_blank" rel="noopener" title="GitHub" style="display:inline-flex;align-items:center;justify-content:center;background:var(--color-surface);border-radius:8px;padding:0.5em 0.8em;"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width:24px;height:24px;vertical-align:middle;"/></a>
-                        <button id="github-star-btn" style="background:var(--color-primary);color:#fff;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;font-size:1em;display:inline-flex;align-items:center;gap:0.5em;">
-                          <span style="font-size:1.1em;">★</span> Star Repo
-                        </button>
-                        <span id="github-star-count" style="background:#eee;border-radius:12px;padding:2px 8px;font-size:0.9em;">★ --</span>
+                        <a href="https://github.com/raghavbali/mastering_llms_workshop" class="github-link" target="_blank" rel="noopener" title="GitHub" style="display:inline-flex;align-items:center;justify-content:center;background:var(--color-surface);border-radius:8px;padding:0.5em 0.8em;"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width:24px;height:24px;vertical-align:middle;"/></a>
                         <label class="theme-switch" style="margin-left:0.5em;">
                             <input type="checkbox" id="${config.themeToggle.id}" />
                             <span class="slider"></span>
@@ -79,29 +75,12 @@
                     </div>
                 </div>
             `;
-            // Fetch GitHub star count
-            fetch('https://api.github.com/repos/raghavbali/mastering_llms_workshop_dhs2025')
-              .then(r => r.json())
-              .then(data => {
-                if (data.stargazers_count !== undefined) {
-                  document.getElementById('github-star-count').textContent = `★ ${data.stargazers_count}`;
-                }
-              });
-            // Star button (opens repo star page)
-            setTimeout(() => {
-              const btn = document.getElementById('github-star-btn');
-              if (btn) {
-                btn.onclick = () => {
-                  window.open('https://github.com/raghavbali/mastering_llms_workshop_dhs2025/stargazers', '_blank');
-                };
-              }
-            }, 500);
         }
         function renderSummary() {
             const summarySection = document.getElementById('summary-section');
             const config = LLM_LIFECYCLE_CONFIG.summary;
             // Use a common Amazon URL from config or fallback
-            const amazonUrl = (LLM_LIFECYCLE_CONFIG.book && LLM_LIFECYCLE_CONFIG.book.amazon_url) ? LLM_LIFECYCLE_CONFIG.book.amazon_url : '#AMAZON_URL';
+            const amazonUrl = "https://www.amazon.com/Generative-Python-PyTorch-Hands-cutting-edge/dp/B0D9QBYYBQ";
             let stagesHTML = '';
             config.stages.forEach((stage, index) => {
                 if (stage.type === 'branch-group') {
@@ -346,16 +325,16 @@
         }
         function renderBookPromo() {
             const promoSection = document.getElementById('book-promo-section');
-            const amazonUrl = (LLM_LIFECYCLE_CONFIG.book && LLM_LIFECYCLE_CONFIG.book.amazon_url) ? LLM_LIFECYCLE_CONFIG.book.amazon_url : '#AMAZON_URL';
+            const amazonUrl = "https://www.amazon.com/Generative-Python-PyTorch-Hands-cutting-edge/dp/B0D9QBYYBQ";
             promoSection.innerHTML = `
                 <div id="book-promo" class="book-promo" style="margin-top:2.5rem;display:flex;align-items:center;gap:2rem;justify-content:center;flex-wrap:wrap;background:var(--color-surface);border-radius:12px;box-shadow:var(--shadow-md);padding:2rem 1.5rem;">
-                    <img src="assets/book_placeholder.png" alt="Book Cover" style="width:120px;height:auto;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);background:#f5f5f5;object-fit:contain;"/>
+                    <img src="assets/packt_gai_2.png" alt="Book Cover" style="width:120px;height:auto;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);background:#f5f5f5;object-fit:contain;"/>
                     <div style="flex:1;min-width:220px;">
-                        <h2 style="margin:0 0 0.5rem 0;font-size:1.5em;">Your Book Title Here</h2>
-                        <p style="margin:0 0 1rem 0;font-size:1.1em;">A practical guide to LLM fine-tuning, packed with hands-on recipes and real-world insights. <span style='color:var(--color-primary);font-weight:600;'>Inspire your LLM journey!</span></p>
+                        <h2 style="margin:0 0 0.5rem 0;font-size:1.5em;">Generative AI with Python and PyTorch, 2nd ed. Edition</h2>
+                        <p style="margin:0 0 1rem 0;font-size:1.1em;">Master GenAI techniques to create images and text using variational autoencoders (VAEs), generative adversarial networks (GANs), LSTMs, and large language models (LLMs). <span style='color:var(--color-primary);font-weight:600;'><br/>Inspire your LLM journey!</span></p>
                         <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
                             <a href="${amazonUrl}" target="_blank" rel="noopener" style="background:#ff9900;color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(255,153,0,0.08);">Buy on Amazon</a>
-                            <a href="https://github.com/raghavbali/mastering_llms_workshop_dhs2025" target="_blank" rel="noopener" style="background:#24292f;color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(36,41,47,0.08);">View on GitHub</a>
+                            <a href="https://github.com/PacktPublishing/Generative-AI-with-Python-and-PyTorch-Second-Edition" target="_blank" rel="noopener" style="background:#24292f;color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(36,41,47,0.08);">View on GitHub</a>
                         </div>
                     </div>
                 </div>
