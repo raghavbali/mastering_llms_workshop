@@ -7,10 +7,7 @@ class ThemeManager {
   }
 
   getInitialTheme() {
-    // Check system preference only (no localStorage in sandbox)
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
+    // Always default to light mode (bright)
     return 'light';
   }
 
@@ -38,15 +35,17 @@ class ThemeManager {
   toggleTheme() {
     this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
     this.applyTheme(this.currentTheme);
+    console.log(`[ThemeManager] Theme toggled to: ${this.currentTheme}`);
   }
 
   applyTheme(theme) {
     document.documentElement.setAttribute('data-color-scheme', theme);
     document.body.setAttribute('data-theme', theme);
     this.currentTheme = theme;
-    
     if (this.themeToggle) {
-      this.themeToggle.innerHTML = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+      this.themeToggle.checked = theme === 'dark';
+      // Update the aria-checked attribute for accessibility
+      this.themeToggle.setAttribute('aria-checked', theme === 'dark' ? 'true' : 'false');
     }
   }
 }
@@ -502,58 +501,22 @@ class InteractiveFeatures {
   }
 }
 
-// Main Application Controller
-class LLMTrainingApp {
-  constructor() {
-    this.components = {};
-    this.init();
-  }
+// Remove LLMTrainingApp and ThemeManager initialization from app_1.js
+// Instead, expose ThemeManager to window for manual control
+window.ThemeManager = ThemeManager;
 
-  init() {
-    // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        this.initializeComponents();
-      });
-    } else {
-      this.initializeComponents();
+// --- Add summary diagram click handler to render content in overview-content-box ---
+document.addEventListener('DOMContentLoaded', function() {
+  // Summary diagram click: render content in overview-content-box
+  document.body.addEventListener('click', function(e) {
+    const stage = e.target.closest('.summary-stage');
+    if (stage && stage.dataset.stage) {
+      const contentBox = document.getElementById('overview-content-box');
+      if (contentBox) {
+        // Render the stage name or a placeholder (can be replaced with real content)
+        const stageText = stage.querySelector('.summary-text')?.textContent || stage.dataset.stage;
+        contentBox.textContent = `You clicked: ${stageText}`;
+      }
     }
-  }
-
-  initializeComponents() {
-    // Initialize all components in order
-    this.components.themeManager = new ThemeManager();
-    this.components.methodTabManager = new MethodTabManager();
-    this.components.summaryDiagramManager = new SummaryDiagramManager();
-    this.components.animationManager = new AnimationManager();
-    this.components.tooltipManager = new TooltipManager();
-    this.components.scrollProgressManager = new ScrollProgressManager();
-    this.components.interactiveFeatures = new InteractiveFeatures();
-
-    // Setup resize handler
-    window.addEventListener('resize', this.handleResize.bind(this));
-    
-    // Setup error handling
-    window.addEventListener('error', this.handleError.bind(this));
-
-    // Add loading complete class
-    document.body.classList.add('app-loaded');
-  }
-
-  handleResize() {
-    // Handle responsive adjustments
-    const summaryDiagram = document.querySelector('.summary-diagram');
-    if (summaryDiagram && window.innerWidth < 768) {
-      summaryDiagram.style.flexDirection = 'column';
-    } else if (summaryDiagram) {
-      summaryDiagram.style.flexDirection = 'row';
-    }
-  }
-
-  handleError(error) {
-    console.error('Application error:', error);
-  }
-}
-
-// Initialize the application
-const app = new LLMTrainingApp();
+  });
+});
