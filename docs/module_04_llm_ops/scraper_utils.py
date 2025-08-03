@@ -35,6 +35,7 @@ class NB_Markdown_Scraper:
 
     # scraper
     def scrape_markdowns(self):
+        '''Scrapes Markdown cell contents'''
         for directory in self.input_paths:
             directory_notebooks = self.nbpathwalk(directory)
             for notebook in directory_notebooks:
