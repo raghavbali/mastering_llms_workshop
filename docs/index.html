@@ -161,12 +161,12 @@
                     let githubPath = href.replace(/^\.\/?|^docs\//, '');
                     // Compose GitHub repo path (assume main branch)
                     const githubBase = 'raghavbali/mastering_llms_workshop/blob/main/docs/';
-                    // nbsanity
-                    // const nbsanity = `<a target="_blank" rel="noopener" href="https://nbsanity.com/view/github/${githubBase}${githubPath}"><img src='https://img.shields.io/badge/Open%20in-nbsanity-blue?logo=github' alt='Open in nbsanity' style='height:1em;vertical-align:middle;'/></a>`;
+                    // GitHub badge
+                    const github = `<a target="_blank" rel="noopener" href="https://github.com/${githubBase}${githubPath}"><img src='https://img.shields.io/badge/View%20on-GitHub-black?logo=github' alt='View on GitHub' style='height:1em;vertical-align:middle;'/></a>`;
                     // nbviewer
                     const nbviewer = `<a target="_blank" rel="noopener" href="https://nbviewer.org/github/${githubBase}${githubPath}"><img src='https://img.shields.io/badge/Open%20in-nbviewer-orange?logo=jupyter' alt='Open in nbviewer' style='height:1em;vertical-align:middle;'/></a>`;
                     // Original link + badges
-                    return `${match} ${nbviewer}`; // ${nbsanity} 
+                    return `${match} ${github} ${nbviewer}`;
                 });
                 return patched;
             }

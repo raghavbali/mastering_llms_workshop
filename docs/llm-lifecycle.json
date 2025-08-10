@@ -370,7 +370,7 @@
           },
           {
             "label": "👨🏻‍💻 Hands-on:",
-            "value": "<ul><li><a href=\"module_04_llm_ops/01_retrieval_augmented_llm_app.ipynb\">RAG</a></li><li><a href=\"module_04_llm_ops/02_dspy_demo.ipynb\">DSPy</a></li></ul>"
+            "value": "<ul><li><a href=\"module_04_llm_apps/01_retrieval_augmented_llm_app.ipynb\">RAG</a></li><li><a href=\"module_04_llm_apps/02_dspy_demo.ipynb\">DSPy</a></li><li><a href=\"module_04_llm_apps/03_mcp_getting_started.ipynb\">Tool Calling & MCP</a></li></ul>"
           }
         ]
       }
