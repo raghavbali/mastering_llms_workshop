@@ -2,13 +2,15 @@
 
 A comprehensive full-day workshop covering the fundamentals and advanced concepts of Large Language Models (LLMs), from theoretical foundations to practical implementation and deployment strategies.
 
+> [!Note]
+> Visit [workshop website](https://raghavbali.github.io/mastering_llms_workshop/) @ (https://raghavbali.github.io/mastering_llms_workshop/)[https://raghavbali.github.io/mastering_llms_workshop/] to navigate with ease
+
 ## Workshop Details
 
 📅 **Date:** August 23rd 2025  
-📍 **Venue:** [TBD - Workshop Venue]  
 🎟️ **Registration:** [Workshop Link](https://www.analyticsvidhya.com/datahacksummit-2025/workshops/mastering-llms-training-fine-tuning-and-best-practices-2)
 
-<img src="./assets/llm_training_lifecycle.png">
+<img src="./docs/assets/llm_training_lifecycle.png">
 
 ## Modules
 
@@ -28,17 +30,25 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
 - Instruction Tuning
 - LLM alignment or Performance Tuning using RLHF/PPO
 
-### Module 05: LLM Ops
+### Module 04: LLM Ops
 - RAG
 - LangChain
 - DSpy
+- Tool/Function Calling
 - MCP
 
 <details>
 <summary>## Setup Instructions</summary>
 
 ### Prerequisites
-Before attending the workshop, please ensure you have the following installed:
+Before attending the workshop, please ensure you have the following:
+
+### Access/Services
+- [Huggingface.co](https://huggingface.co/)
+- [Github.com](https://github.com/)
+- LLM API Keys:
+  - OpenAI/Gemini/Claude OR
+  - [Ollama](https://ollama.com/) for local LLMs
 
 ```bash
 # Clone the repository
@@ -70,6 +80,17 @@ cd mastering_llms_workshop_dhs2025
   - [Code/Github Repo](https://github.com/raghavbali/llm_workshop_dhs23)
 
 
+## Thanks
+A huge round of thanks to amazing teams at:
+<div align="center" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+  <img src="./docs/assets/00_hf.svg" alt="Hugging Face" style="height: 80px; border-radius: 50%; padding: 2px; background: white;">
+  <img src="./docs/assets/00_ollama.png" alt="Ollama" style="height: 80px; border-radius: 50%; padding: 2px; background: white;">
+  <img src="./docs/assets/00_unsloth.jpeg" alt="Unsloth" style="height: 80px;">
+  <img src="./docs/assets/dspy_logo.png" alt="Ollama" style="height: 80px;">
+  <img src="./docs/assets/00_chroma.webp" alt="Chroma" style="height: 80px;">
+  <img src="./docs/assets/00_mcp.png" alt="Model Context Protocol" style="height: 80px; border-radius: 50%; padding: 2px; background: white;">
+</div>
+
 ## Citation
 
 If you use materials from this workshop in your research or projects, please cite:
@@ -89,5 +110,5 @@ If you use materials from this workshop in your research or projects, please cit
 For questions about the workshop content or materials, please [open an issue](https://github.com/raghavbali/mastering_llms_workshop_dhs2025/issues) in this repository.
 
 **Author:**
-- 💼 **LinkedIn:** www.linkedin.com/in/baliraghav
-- 🌐 **Website:** https://raghavbali.github.io/
+- 💼 **LinkedIn:** [www.linkedin.com/in/baliraghav](www.linkedin.com/in/baliraghav)
+- 🌐 **Personal Website:** [https://raghavbali.github.io/](https://raghavbali.github.io/)
