@@ -47,10 +47,14 @@
     "slide4": {
       "title": "Recent Publication",
       "book_title": "Generative AI with Python and PyTorch, 2nd Edition",
-      "book_description": "Master GenAI techniques to create images and text using variational autoencoders (VAEs), generative adversarial networks (GANs), LSTMs, and large language models (LLMs). Inspire your LLM journey!",
+      "book_description": "Master GenAI techniques to create images and text using variational autoencoders (VAEs), generative adversarial networks (GANs), LSTMs, and large language models (LLMs).",
+      "book_highlight": "Inspire your LLM journey!",
       "book_cover": "../assets/packt_gai_2.png",
+      "book_cover_alt": "Generative AI with Python and PyTorch Book Cover",
       "amazon_link": "https://www.amazon.com/Generative-Python-PyTorch-Hands-cutting-edge/dp/B0D9QBYYBQ",
-      "github_link": "https://github.com/PacktPublishing/Generative-AI-with-Python-and-PyTorch-Second-Edition"
+      "github_link": "https://github.com/PacktPublishing/Generative-AI-with-Python-and-PyTorch-Second-Edition",
+      "amazon_text": "📚 Buy on Amazon",
+      "github_text": "💻 View on GitHub"
     },
     "slide5": {
       "title": "Getting Started",
@@ -87,7 +91,8 @@
     "slide6": {
       "title": "Let's Get Started",
       "kickstart_image_placeholder": "[workshop_kickstart_image]",
-      "materials_link": "{{global.workshop_materials_link}}"
+      "kickstart_image_url": "{{global.workshop_materials_link}}",
+      "reminder_text": "⭐ Remember to star the repository for future use!"
     }
   }
 }

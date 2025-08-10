@@ -124,24 +124,42 @@ function populateSlideContent() {
     if (config.slides?.slide4) {
         const slide4 = config.slides.slide4;
         
+        // Update slide title
+        const slideTitle = document.getElementById('book-slide-title');
+        if (slideTitle && slide4.title) {
+            slideTitle.textContent = resolveTemplate(slide4.title);
+        }
+        
         // Update book content dynamically
         const bookTitle = document.getElementById('book-title');
         const bookDescription = document.getElementById('book-description');
         const bookCover = document.getElementById('book-cover-img');
+        const bookActions = document.getElementById('book-actions');
         
         if (bookTitle && slide4.book_title) {
             bookTitle.textContent = slide4.book_title;
         }
         
         if (bookDescription && slide4.book_description) {
-            bookDescription.innerHTML = slide4.book_description.replace(
-                'Inspire your LLM journey!', 
-                '<span class="book-highlight">Inspire your LLM journey!</span>'
-            );
+            const highlightText = slide4.book_highlight || '';
+            bookDescription.innerHTML = `${slide4.book_description} <span class="book-highlight">${highlightText}</span>`;
         }
         
         if (bookCover && slide4.book_cover) {
             bookCover.src = slide4.book_cover;
+            bookCover.alt = slide4.book_cover_alt || 'Book Cover';
+        }
+        
+        // Populate book action buttons dynamically
+        if (bookActions) {
+            bookActions.innerHTML = `
+                <a href="${slide4.amazon_link}" target="_blank" rel="noopener" class="book-btn book-btn--amazon">
+                    ${slide4.amazon_text || '📚 Buy on Amazon'}
+                </a>
+                <a href="${slide4.github_link}" target="_blank" rel="noopener" class="book-btn book-btn--github">
+                    ${slide4.github_text || '💻 View on GitHub'}
+                </a>
+            `;
         }
     }
 
@@ -164,13 +182,23 @@ function populateSlideContent() {
     // Slide 6: Let's Get Started
     if (config.slides?.slide6) {
         const slide6 = config.slides.slide6;
-        const materialsLink = document.getElementById('materials-link');
-        if (materialsLink && slide6.materials_link) {
-            materialsLink.innerHTML = `
-                <a href="${resolveTemplate(slide6.materials_link)}" target="_blank">
-                    <code>Open: ${resolveTemplate(slide6.materials_link)}</code>
-                </a>
-            `;
+        
+        // Update slide title
+        const kickstartTitle = document.getElementById('kickstart-title');
+        if (kickstartTitle && slide6.title) {
+            kickstartTitle.textContent = slide6.title;
+        }
+        
+        // Update clickable image link
+        const kickstartLink = document.getElementById('kickstart-link');
+        if (kickstartLink && slide6.kickstart_image_url) {
+            kickstartLink.href = resolveTemplate(slide6.kickstart_image_url);
+        }
+        
+        // Update reminder text
+        const reminder = document.getElementById('reminder');
+        if (reminder && slide6.reminder_text) {
+            reminder.innerHTML = `<p><strong>${slide6.reminder_text}</strong></p>`;
         }
     }
 }

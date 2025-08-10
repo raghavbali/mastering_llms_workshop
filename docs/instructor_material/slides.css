@@ -350,14 +350,38 @@ body {
 
 /* Kickstart Slide */
 .kickstart-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 2rem;
+    text-align: center;
+}
+
+.kickstart-image-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.kickstart-image-container a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.kickstart-image-container a:hover {
+    transform: translateY(-4px);
 }
 
 .kickstart-image {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+    width: 400px;
     height: 300px;
     border-radius: var(--radius-lg);
     display: flex;
@@ -368,6 +392,25 @@ body {
     text-align: center;
     padding: 2rem;
     box-shadow: 0 12px 40px rgba(33, 128, 141, 0.3);
+    transition: all var(--duration-fast) var(--ease-standard);
+    cursor: pointer;
+}
+
+.kickstart-image:hover {
+    box-shadow: 0 16px 48px rgba(33, 128, 141, 0.4);
+    transform: scale(1.02);
+}
+
+.image-caption {
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+}
+
+.access-info {
+    width: 100%;
+    max-width: 600px;
 }
 
 .access-info h3 {
@@ -412,6 +455,7 @@ body {
     color: var(--color-warning);
     font-size: 1.2rem;
     font-weight: var(--font-weight-medium);
+    margin: 0;
 }
 
 /* Book Slide */
@@ -649,10 +693,20 @@ input:checked + .slider:before {
     
     .agenda-container,
     .getting-started-content,
-    .kickstart-content,
     .book-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+    
+    .kickstart-content {
+        gap: 1.5rem;
+    }
+    
+    .kickstart-image {
+        width: 300px;
+        height: 200px;
+        font-size: 1rem;
+        padding: 1.5rem;
     }
     
     .instructor-layout {
