@@ -8,33 +8,6 @@ This document provides development guidelines and best practices for contributor
 - Ensure compatibility with modern Python features and type hints
 - Leverage new Python 3.11+ features where appropriate (e.g., improved error messages, performance enhancements)
 
-## Dependency Management
-
-- **Use Poetry** for all dependency management tasks
-- Maintain `pyproject.toml` for project configuration and dependencies
-- Use `poetry add` for adding new dependencies
-- Use `poetry add --group dev` for development dependencies
-- Keep `poetry.lock` file committed to ensure reproducible builds
-- Use semantic versioning for dependency constraints
-
-### Poetry Commands Reference
-```bash
-# Install dependencies
-poetry install
-
-# Add runtime dependency
-poetry add package-name
-
-# Add development dependency  
-poetry add --group dev package-name
-
-# Update dependencies
-poetry update
-
-# Activate virtual environment
-poetry shell
-```
-
 ## Development Environment
 
 - **Leverage Jupyter Lab** wherever possible for:
@@ -64,27 +37,15 @@ poetry shell
 Organize content into logical modules:
 
 ```
-workshop_modules/
-├── 01_foundations/
-│   ├── introduction_to_llms.ipynb
-│   ├── setup_and_installation.ipynb
-│   └── basic_concepts.ipynb
-├── 02_prompt_engineering/
-│   ├── prompt_design_principles.ipynb
-│   ├── advanced_prompting_techniques.ipynb
-│   └── prompt_optimization.ipynb
-├── 03_fine_tuning/
-│   ├── dataset_preparation.ipynb
-│   ├── training_process.ipynb
-│   └── evaluation_metrics.ipynb
-├── 04_deployment/
-│   ├── model_serving.ipynb
-│   ├── api_development.ipynb
-│   └── production_considerations.ipynb
-└── utils/
-    ├── llm_helpers.py
-    ├── data_processing.py
-    └── evaluation_tools.py
+|──README.md
+|──llm.txt
+|──LICENSE
+├──docs/
+    ├── assets/
+    ├── module_01_lm_fundamentals/
+    ├── module_02_llm_building_blocks/
+    ├── module_03_instruction_tuning_and_alignment/
+    ├── module_04_llm_apps/
 ```
 
 ## Documentation Synchronization
@@ -129,8 +90,8 @@ workshop_modules/
 - Provide a comprehensive overview of the repository
 - Include current project structure
 - List key technologies and frameworks used
-- Document workshop progression and learning path
-- Include troubleshooting information
+- Document overview of topics covered in each module
+- Include links to relevant resources and documentation
 
 ## Code Quality Standards
 

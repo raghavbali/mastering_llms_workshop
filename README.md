@@ -18,7 +18,7 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
 - Fundamentals of text representation
 - Contextual embeddings using transformers.
 
-### [Module 02: LLM Building Blocks](docs/module_02_llm_building_blocks/)
+### [Module 02: LLM Building Blocks](docs/module_02_llm_building_blocks/README.md)
 - Internals of the transformer architecture: attention mechanism, embeddings, and core components that make up large language models
 - HuggingFace pipelines for different tasks a language model can handle: classification, text generation, etc. 
 - Fine-tune a pretrained GPT2 for code-generation.
@@ -26,11 +26,11 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
   - PEFT
   - Quantization/LoRA
 
-### [Module 03: Instruction Tuning and Alignment](docs/module_03_instruction_tuning_and_alignment/)
+### [Module 03: Instruction Tuning and Alignment](docs/module_03_instruction_tuning_and_alignment/README.md)
 - Instruction Tuning
 - LLM alignment or Performance Tuning using RLHF/PPO
 
-### [Module 04: LLM Applications](docs/module_04_llm_apps/)
+### [Module 04: LLM Applications](docs/module_04_llm_apps/README.md)
 - RAG
 - LangChain
 - DSpy
