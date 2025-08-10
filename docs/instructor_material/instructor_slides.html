@@ -11,6 +11,12 @@
     <!-- Slide 1: Introduction -->
     <div class="slide active" id="slide1">
         <div class="slide-content intro-slide">
+            <div class="theme-toggle-container">
+                <label class="theme-switch">
+                    <input type="checkbox" id="themeToggle" />
+                    <span class="slider"></span>
+                </label>
+            </div>
             <h1 class="main-title" id="main-title">Mastering LLMs</h1>
             <h2 class="subtitle" id="subtitle">Training, Fine-Tuning and Best Practices</h2>
             <div class="instructor-info">
@@ -45,8 +51,36 @@
                     <div class="intro-placeholder" id="instructor-intro">
                         [instructor_short_intro]
                     </div>
-                    <div class="book-info" id="book-info">
-                        [recent_generative_ai_book_info]
+                </div>
+            </div>
+        </div>
+        <footer class="slide-footer" id="footer">Mastering LLMs Workshop - Raghav Bali</footer>
+    </div>
+
+    <!-- Slide 4: Book Information -->
+    <div class="slide" id="slide4">
+        <div class="slide-content book-slide">
+            <h1 class="slide-title">Recent Publication</h1>
+            <div class="book-content">
+                <div class="book-cover">
+                    <img src="../assets/packt_gai_2.png" alt="Generative AI with Python and PyTorch Book Cover" id="book-cover-img">
+                </div>
+                <div class="book-details">
+                    <h3 id="book-title">Generative AI with Python and PyTorch, 2nd Edition</h3>
+                    <p id="book-description">
+                        Master GenAI techniques to create images and text using variational autoencoders (VAEs), 
+                        generative adversarial networks (GANs), LSTMs, and large language models (LLMs). 
+                        <span class="book-highlight">Inspire your LLM journey!</span>
+                    </p>
+                    <div class="book-actions">
+                        <a href="https://www.amazon.com/Generative-Python-PyTorch-Hands-cutting-edge/dp/B0D9QBYYBQ" 
+                           target="_blank" rel="noopener" class="book-btn book-btn--amazon">
+                            📚 Buy on Amazon
+                        </a>
+                        <a href="https://github.com/PacktPublishing/Generative-AI-with-Python-and-PyTorch-Second-Edition" 
+                           target="_blank" rel="noopener" class="book-btn book-btn--github">
+                            💻 View on GitHub
+                        </a>
                     </div>
                 </div>
             </div>
@@ -55,7 +89,7 @@
     </div>
 
     <!-- Slide 4: Getting Started -->
-    <div class="slide" id="slide4">
+    <div class="slide" id="slide5">
         <div class="slide-content">
             <h1 class="slide-title">Getting Started</h1>
             <div class="getting-started-content">
@@ -86,7 +120,7 @@
     </div>
 
     <!-- Slide 5: Let's Get Started -->
-    <div class="slide" id="slide5">
+    <div class="slide" id="slide6">
         <div class="slide-content kickstart-slide">
             <h1 class="slide-title">Let's Get Started</h1>
             <div class="kickstart-content">
@@ -113,7 +147,7 @@
     <div class="navigation">
         <button id="prevBtn" onclick="changeSlide(-1)">‹ Previous</button>
         <span class="slide-counter">
-            <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+            <span id="currentSlide">1</span> / <span id="totalSlides">6</span>
         </span>
         <button id="nextBtn" onclick="changeSlide(1)">Next ›</button>
     </div>

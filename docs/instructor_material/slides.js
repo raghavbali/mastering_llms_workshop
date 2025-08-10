@@ -9,6 +9,72 @@ document.getElementById('totalSlides').textContent = totalSlides;
 // Configuration data
 let config = {};
 
+// Theme Management - matching main site functionality
+class ThemeManager {
+    constructor() {
+        this.currentTheme = this.getInitialTheme();
+        this.themeToggle = null;
+        this.init();
+    }
+
+    getInitialTheme() {
+        // Always default to light mode
+        return 'light';
+    }
+
+    init() {
+        this.findThemeToggle();
+        this.applyTheme(this.currentTheme);
+        this.bindEvents();
+    }
+
+    findThemeToggle() {
+        this.themeToggle = document.getElementById('themeToggle');
+        if (!this.themeToggle) {
+            setTimeout(() => {
+                this.themeToggle = document.getElementById('themeToggle');
+                if (this.themeToggle) {
+                    this.bindEvents();
+                    this.applyTheme(this.currentTheme);
+                }
+            }, 100);
+        }
+    }
+
+    bindEvents() {
+        if (this.themeToggle) {
+            this.themeToggle.removeEventListener('change', this.handleToggleChange);
+            this.handleToggleChange = this.handleToggleChange.bind(this);
+            this.themeToggle.addEventListener('change', this.handleToggleChange);
+        }
+
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                this.applyTheme(e.matches ? 'dark' : 'light');
+            });
+        }
+    }
+
+    handleToggleChange(e) {
+        const newTheme = e.target.checked ? 'dark' : 'light';
+        this.currentTheme = newTheme;
+        this.applyTheme(newTheme);
+    }
+
+    applyTheme(theme) {
+        document.documentElement.setAttribute('data-color-scheme', theme);
+        document.body.setAttribute('data-theme', theme);
+        this.currentTheme = theme;
+        if (this.themeToggle) {
+            const shouldBeChecked = theme === 'dark';
+            if (this.themeToggle.checked !== shouldBeChecked) {
+                this.themeToggle.checked = shouldBeChecked;
+            }
+            this.themeToggle.setAttribute('aria-checked', shouldBeChecked ? 'true' : 'false');
+        }
+    }
+}
+
 // Load configuration from JSON
 async function loadConfig() {
     try {
@@ -51,33 +117,58 @@ function populateSlideContent() {
         const slide3 = config.slides.slide3;
         document.getElementById('instructor-title').textContent = 
             resolveTemplate(slide3.title) || 'Raghav Bali';
-        // Note: Photo, intro, and book placeholders remain as placeholders for manual replacement
+        // Note: Photo and intro placeholders remain as placeholders for manual replacement
     }
 
-    // Slide 4: Getting Started
+    // Slide 4: Book Information
     if (config.slides?.slide4) {
         const slide4 = config.slides.slide4;
         
-        // Update repository link
-        const repoLink = document.getElementById('repo-link');
-        if (repoLink && slide4.repository_link) {
-            repoLink.innerHTML = `<code>git clone ${resolveTemplate(slide4.repository_link)}</code>`;
+        // Update book content dynamically
+        const bookTitle = document.getElementById('book-title');
+        const bookDescription = document.getElementById('book-description');
+        const bookCover = document.getElementById('book-cover-img');
+        
+        if (bookTitle && slide4.book_title) {
+            bookTitle.textContent = slide4.book_title;
         }
-
-        // Populate breaks
-        if (slide4.breaks) {
-            populateBreaks(slide4.breaks);
+        
+        if (bookDescription && slide4.book_description) {
+            bookDescription.innerHTML = slide4.book_description.replace(
+                'Inspire your LLM journey!', 
+                '<span class="book-highlight">Inspire your LLM journey!</span>'
+            );
+        }
+        
+        if (bookCover && slide4.book_cover) {
+            bookCover.src = slide4.book_cover;
         }
     }
 
-    // Slide 5: Let's Get Started
+    // Slide 5: Getting Started
     if (config.slides?.slide5) {
         const slide5 = config.slides.slide5;
+        
+        // Update repository link
+        const repoLink = document.getElementById('repo-link');
+        if (repoLink && slide5.repository_link) {
+            repoLink.innerHTML = `<code>git clone ${resolveTemplate(slide5.repository_link)}</code>`;
+        }
+
+        // Populate breaks
+        if (slide5.breaks) {
+            populateBreaks(slide5.breaks);
+        }
+    }
+
+    // Slide 6: Let's Get Started
+    if (config.slides?.slide6) {
+        const slide6 = config.slides.slide6;
         const materialsLink = document.getElementById('materials-link');
-        if (materialsLink && slide5.materials_link) {
+        if (materialsLink && slide6.materials_link) {
             materialsLink.innerHTML = `
-                <a href="${resolveTemplate(slide5.materials_link)}" target="_blank">
-                    <code>Open: ${resolveTemplate(slide5.materials_link)}</code>
+                <a href="${resolveTemplate(slide6.materials_link)}" target="_blank">
+                    <code>Open: ${resolveTemplate(slide6.materials_link)}</code>
                 </a>
             `;
         }
@@ -121,7 +212,7 @@ function populateBreaks(breaks) {
     
     breaks.forEach(breakItem => {
         const breakDiv = document.createElement('div');
-        breakDiv.className = 'break-item';
+        breakDiv.className = breakItem.highlight ? 'break-item networking-highlight' : 'break-item';
         breakDiv.innerHTML = `
             <span class="break-name">${breakItem.name}</span>
             <span class="break-time">${breakItem.time}</span>
@@ -225,6 +316,9 @@ function exitPresentationMode() {
 document.addEventListener('DOMContentLoaded', () => {
     loadConfig();
     showSlide(0);
+    
+    // Initialize theme manager
+    window.themeManager = new ThemeManager();
     
     // Add presentation mode shortcuts
     const nav = document.querySelector('.navigation');

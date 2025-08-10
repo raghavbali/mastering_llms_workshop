@@ -42,37 +42,49 @@
     "slide3": {
       "title": "{{global.instructor_name}}",
       "photo_placeholder": "[instructor_photo_circle_crop]",
-      "intro_placeholder": "[instructor_short_intro]",
-      "book_placeholder": "[recent_generative_ai_book_info]"
+      "intro_placeholder": "[instructor_short_intro]"
     },
     "slide4": {
+      "title": "Recent Publication",
+      "book_title": "Generative AI with Python and PyTorch, 2nd Edition",
+      "book_description": "Master GenAI techniques to create images and text using variational autoencoders (VAEs), generative adversarial networks (GANs), LSTMs, and large language models (LLMs). Inspire your LLM journey!",
+      "book_cover": "../assets/packt_gai_2.png",
+      "amazon_link": "https://www.amazon.com/Generative-Python-PyTorch-Hands-cutting-edge/dp/B0D9QBYYBQ",
+      "github_link": "https://github.com/PacktPublishing/Generative-AI-with-Python-and-PyTorch-Second-Edition"
+    },
+    "slide5": {
       "title": "Getting Started",
       "wifi_details": "[wifi_network_details]",
       "repository_link": "{{global.repository_link}}",
       "breaks": [
         {
           "name": "Tea/Coffee Break",
-          "time": "[time] am"
+          "time": "[time] am",
+          "highlight": false
         },
         {
           "name": "Lunch Break",
-          "time": "[time] pm"
+          "time": "[time] pm",
+          "highlight": false
         },
         {
           "name": "Tea/Coffee Break",
-          "time": "[time] pm"
+          "time": "[time] pm",
+          "highlight": false
         },
         {
           "name": "Networking Session & Quiz with Prize(s)",
-          "time": "[time] pm"
+          "time": "[time] pm",
+          "highlight": true
         },
         {
           "name": "Wrap Up",
-          "time": "[time] pm"
+          "time": "[time] pm",
+          "highlight": false
         }
       ]
     },
-    "slide5": {
+    "slide6": {
       "title": "Let's Get Started",
       "kickstart_image_placeholder": "[workshop_kickstart_image]",
       "materials_link": "{{global.workshop_materials_link}}"
