@@ -6,7 +6,7 @@
     "instructor_name": "Raghav Bali",
     "instructor_designation": "Principal Data Scientist, DeliveryHero",
     "repository_link": "https://github.com/raghavbali/mastering_llms_workshop",
-    "workshop_materials_link": "index.html"
+    "workshop_materials_link": "https://raghavbali.github.io/mastering_llms_workshop/"
   },
   "slides": {
     "slide1": {
@@ -20,35 +20,35 @@
         {
           "title": "Module 1: Language Model Fundamentals",
           "description": "Understanding text representation and contextual embeddings",
-          "duration": "[time]"
+          "duration": "60-75mins"
         },
         {
           "title": "Module 2: LLM Building Blocks",
           "description": "Transformers, training, and scaling strategies",
-          "duration": "[time]"
+          "duration": "90-120mins"
         },
         {
           "title": "Module 3: Instruction Tuning & Alignment",
           "description": "Fine-tuning techniques and RLHF implementation",
-          "duration": "[time]"
+          "duration": "120-150mins"
         },
         {
           "title": "Module 4: LLM Applications",
           "description": "Building RAG systems and production-ready applications",
-          "duration": "[time]"
+          "duration": "60mins"
         }
       ]
     },
     "slide3": {
       "title": "{{global.instructor_name}}",
-      "photo_placeholder": "[instructor_photo_circle_crop]",
-      "intro_placeholder": "[instructor_short_intro]"
+      "photo_placeholder": "https://raghavbali.github.io/img/cover2.jpg",
+      "intro_placeholder": "15+ years in data science, machine learning, and AI. Passionate about building scalable AI systems. Has 9 well received books on AI and ML and 10+ USPTO patents & Peer Reveiwed Papers across various domains."
     },
     "slide4": {
       "title": "Recent Publication",
       "book_title": "Generative AI with Python and PyTorch, 2nd Edition",
       "book_description": "Master GenAI techniques to create images and text using variational autoencoders (VAEs), generative adversarial networks (GANs), LSTMs, and large language models (LLMs).",
-      "book_highlight": "Inspire your LLM journey!",
+      "book_highlight": "\nInspire your LLM journey!",
       "book_cover": "../assets/packt_gai_2.png",
       "book_cover_alt": "Generative AI with Python and PyTorch Book Cover",
       "amazon_link": "https://www.amazon.com/Generative-Python-PyTorch-Hands-cutting-edge/dp/B0D9QBYYBQ",
@@ -62,35 +62,40 @@
       "repository_link": "{{global.repository_link}}",
       "breaks": [
         {
+          "name": "Start/Introduction",
+          "time": "830 am",
+          "highlight": false
+        },
+        {
           "name": "Tea/Coffee Break",
-          "time": "[time] am",
+          "time": "10 am (15mins)",
           "highlight": false
         },
         {
           "name": "Lunch Break",
-          "time": "[time] pm",
+          "time": "1 pm (30mins)",
           "highlight": false
         },
         {
           "name": "Tea/Coffee Break",
-          "time": "[time] pm",
+          "time": "2:45 pm (15mins)",
           "highlight": false
         },
         {
-          "name": "Networking Session & Quiz with Prize(s)",
-          "time": "[time] pm",
+          "name": "Q&A + Quiz with Prize(s)",
+          "time": "4:15 pm (15mins)",
           "highlight": true
         },
         {
           "name": "Wrap Up",
-          "time": "[time] pm",
+          "time": "5 pm",
           "highlight": false
         }
       ]
     },
     "slide6": {
       "title": "Let's Get Started",
-      "kickstart_image_placeholder": "[workshop_kickstart_image]",
+      "kickstart_image_placeholder": "../assets/llm_training_lifecycle.png",
       "kickstart_image_url": "{{global.workshop_materials_link}}",
       "reminder_text": "⭐ Remember to star the repository for future use!"
     }

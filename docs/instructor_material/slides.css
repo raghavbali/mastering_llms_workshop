@@ -235,7 +235,7 @@ body {
     color: white;
     font-size: 1.1rem;
     text-align: center;
-    padding: 2rem;
+    padding: 0.1rem;
     box-shadow: 0 8px 32px rgba(33, 128, 141, 0.3);
 }
 
@@ -380,9 +380,8 @@ body {
 }
 
 .kickstart-image {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
-    width: 400px;
-    height: 300px;
+    background: transparent;
+    width: 600px;
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
@@ -390,14 +389,14 @@ body {
     color: white;
     font-size: 1.2rem;
     text-align: center;
-    padding: 2rem;
-    box-shadow: 0 12px 40px rgba(33, 128, 141, 0.3);
+    padding: 0;
+    box-shadow: none;
     transition: all var(--duration-fast) var(--ease-standard);
     cursor: pointer;
 }
 
 .kickstart-image:hover {
-    box-shadow: 0 16px 48px rgba(33, 128, 141, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     transform: scale(1.02);
 }
 
@@ -703,10 +702,9 @@ input:checked + .slider:before {
     }
     
     .kickstart-image {
-        width: 300px;
-        height: 200px;
+        width: 450px;
         font-size: 1rem;
-        padding: 1.5rem;
+        padding: 0;
     }
     
     .instructor-layout {

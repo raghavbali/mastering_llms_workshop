@@ -117,7 +117,34 @@ function populateSlideContent() {
         const slide3 = config.slides.slide3;
         document.getElementById('instructor-title').textContent = 
             resolveTemplate(slide3.title) || 'Raghav Bali';
-        // Note: Photo and intro placeholders remain as placeholders for manual replacement
+        
+        // Handle instructor photo
+        const instructorPhoto = document.getElementById('instructor-photo');
+        if (instructorPhoto && slide3.photo_placeholder) {
+            const photoUrl = resolveTemplate(slide3.photo_placeholder);
+            // Check if it's a URL or a placeholder
+            if (photoUrl.startsWith('http://') || photoUrl.startsWith('https://')) {
+                // Replace the placeholder with an actual image
+                instructorPhoto.innerHTML = `<img src="${photoUrl}" alt="Instructor Photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" />`;
+            } else {
+                // Keep as placeholder text
+                instructorPhoto.textContent = photoUrl;
+            }
+        }
+        
+        // Handle instructor intro
+        const instructorIntro = document.getElementById('instructor-intro');
+        if (instructorIntro && slide3.intro_placeholder) {
+            const introText = resolveTemplate(slide3.intro_placeholder);
+            // Check if it's still a placeholder or actual content
+            if (introText.startsWith('[') && introText.endsWith(']')) {
+                // Keep as placeholder text
+                instructorIntro.textContent = introText;
+            } else {
+                // Replace with actual intro content
+                instructorIntro.innerHTML = introText;
+            }
+        }
     }
 
     // Slide 4: Book Information
@@ -187,6 +214,20 @@ function populateSlideContent() {
         const kickstartTitle = document.getElementById('kickstart-title');
         if (kickstartTitle && slide6.title) {
             kickstartTitle.textContent = slide6.title;
+        }
+        
+        // Handle kickstart image
+        const kickstartImage = document.getElementById('kickstart-image');
+        if (kickstartImage && slide6.kickstart_image_placeholder) {
+            const imagePath = resolveTemplate(slide6.kickstart_image_placeholder);
+            // Check if it's an image path or a placeholder
+            if (imagePath.endsWith('.png') || imagePath.endsWith('.jpg') || imagePath.endsWith('.jpeg') || imagePath.endsWith('.gif') || imagePath.endsWith('.svg')) {
+                // Replace the placeholder with an actual image
+                kickstartImage.innerHTML = `<img src="${imagePath}" alt="Workshop Kickstart Image" style="width: 100%; height: 100%; object-fit: contain; border-radius: inherit;" />`;
+            } else {
+                // Keep as placeholder text
+                kickstartImage.textContent = imagePath;
+            }
         }
         
         // Update clickable image link
