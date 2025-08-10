@@ -2,7 +2,7 @@
 class ThemeManager {
   constructor() {
     this.currentTheme = this.getInitialTheme();
-    this.themeToggle = document.getElementById('themeToggle');
+    this.themeToggle = null;
     this.init();
   }
 
@@ -12,16 +12,35 @@ class ThemeManager {
   }
 
   init() {
+    this.findThemeToggle();
     this.applyTheme(this.currentTheme);
     this.bindEvents();
   }
 
+  findThemeToggle() {
+    this.themeToggle = document.getElementById('themeToggle');
+    if (!this.themeToggle) {
+      // Try again after a short delay if element not found
+      setTimeout(() => {
+        this.themeToggle = document.getElementById('themeToggle');
+        if (this.themeToggle) {
+          this.bindEvents();
+          this.applyTheme(this.currentTheme);
+        }
+      }, 100);
+    }
+  }
+
   bindEvents() {
     if (this.themeToggle) {
-      this.themeToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.toggleTheme();
-      });
+      // Remove any existing event listeners to avoid duplicates
+      this.themeToggle.removeEventListener('change', this.handleToggleChange);
+      
+      // Bind the method to preserve 'this' context
+      this.handleToggleChange = this.handleToggleChange.bind(this);
+      
+      // Only listen to change events for checkbox
+      this.themeToggle.addEventListener('change', this.handleToggleChange);
     }
 
     // Listen for system theme changes
@@ -32,10 +51,12 @@ class ThemeManager {
     }
   }
 
-  toggleTheme() {
-    this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-    this.applyTheme(this.currentTheme);
-    console.log(`[ThemeManager] Theme toggled to: ${this.currentTheme}`);
+  handleToggleChange(e) {
+    // Handle checkbox change events - toggle based on checkbox state
+    const newTheme = e.target.checked ? 'dark' : 'light';
+    this.currentTheme = newTheme;
+    this.applyTheme(newTheme);
+    console.log(`[ThemeManager] Theme changed to: ${newTheme}`);
   }
 
   applyTheme(theme) {
@@ -43,9 +64,13 @@ class ThemeManager {
     document.body.setAttribute('data-theme', theme);
     this.currentTheme = theme;
     if (this.themeToggle) {
-      this.themeToggle.checked = theme === 'dark';
+      // Only update checkbox if it's different from current state
+      const shouldBeChecked = theme === 'dark';
+      if (this.themeToggle.checked !== shouldBeChecked) {
+        this.themeToggle.checked = shouldBeChecked;
+      }
       // Update the aria-checked attribute for accessibility
-      this.themeToggle.setAttribute('aria-checked', theme === 'dark' ? 'true' : 'false');
+      this.themeToggle.setAttribute('aria-checked', shouldBeChecked ? 'true' : 'false');
     }
   }
 }

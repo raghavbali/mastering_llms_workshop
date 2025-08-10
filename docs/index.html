@@ -400,6 +400,11 @@
             renderPhases(); // Move phases before timeline
             renderBookPromo();
             setupEventHandlers();
+            
+            // Initialize theme manager after header is rendered
+            if (window.ThemeManager) {
+                window.themeManager = new window.ThemeManager();
+            }
         }
         
         // Load the page when DOM is ready
@@ -477,60 +482,8 @@
         }
         /* --- Theme switch toggle styles --- */
         .theme-switch {
-            position: relative;
-            display: inline-block;
-            width: 52px;
-            height: 28px;
             margin-left: auto;
             margin-top: 0.5rem;
-        }
-        .theme-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(90deg, #e0e7ef 0%, #64748b 100%);
-            border-radius: 34px;
-            transition: background 0.3s;
-        }
-        .slider:before {
-            position: absolute;
-            content: '';
-            height: 22px;
-            width: 22px;
-            left: 4px;
-            bottom: 3px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-        .theme-switch input:checked + .slider {
-            background: linear-gradient(90deg, #334155 0%, #0f172a 100%);
-        }
-        .theme-switch input:checked + .slider:before {
-            transform: translateX(24px);
-        }
-        .slider {
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-        }
-        /* Optional: add a moon/sun icon */
-        .theme-switch .slider:after {
-            content: '\1F319'; /* moon by default */
-            position: absolute;
-            right: 8px;
-            top: 4px;
-            font-size: 1rem;
-            color: #64748b;
-            transition: content 0.3s;
-        }
-        .theme-switch input:checked + .slider:after {
-            content: '\2600'; /* sun when checked */
-            color: #facc15;
         }
         .overview-promo-row {
           width: 100%;
