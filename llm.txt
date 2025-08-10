@@ -1,143 +1,133 @@
 # LLM.txt - Repository Status and Documentation
 
 ## Repository Overview
-**Repository:** mastering_llms_workshop_dhs2025
-**Purpose:** Full Day Workshop on Mastering LLMs
+**Repository:** mastering_llms_workshop_dhs2025  
+**Purpose:** Full Day Workshop on Mastering LLMs: Training, Fine-Tuning, and Best Practices  
 **License:** GNU General Public License v3.0
 
 ## Current Repository Structure
 ```
 mastering_llms_workshop_dhs2025/
-├── README.md                    # Basic repository description
+├── README.md                    # Main repository overview and setup
 ├── LICENSE                      # GPL v3.0 license
-├── .gitignore                   # Comprehensive Python gitignore
 ├── copilot-instructions.md      # Development guidelines and best practices
-└── llm.txt                      # This documentation file
+├── llm.txt                      # This documentation file
+└── docs/
+    ├── assets/                  # Images and supporting files
+    ├── module_01_lm_fundamentals/
+    │   ├── 01_text_representation.ipynb
+    │   ├── 02_contextual_embeddings.ipynb
+    │   └── README.md
+    ├── module_02_llm_building_blocks/
+    │   ├── 01_transformers.ipynb
+    │   ├── 02_transformers_pipelines.ipynb
+    │   ├── 03_training_language_models.ipynb
+    │   ├── 04_llm_training_and_scaling.ipynb
+    │   └── README.md
+    ├── module_03_instruction_tuning_and_alignment/
+    │   ├── 01_instruction_tuning_llama_txt2py.ipynb
+    │   ├── 02_RLHF_phi2.ipynb
+    │   ├── 03_zephyr_alignment_dpo.ipynb
+    │   └── README.md
+    ├── module_04_llm_apps/
+    │   ├── 01_retrieval_augmented_llm_app.ipynb
+    │   ├── 02_dspy_demo.ipynb
+    │   ├── 03_mcp_getting_started.ipynb
+    │   ├── app.py
+    │   ├── constants.py
+    │   ├── mcp_chatbot.py
+    │   ├── openai_mcp_handler.py
+    │   ├── README.md
+    │   └── ...
+    └── ...
 ```
 
 ## Development Setup and Requirements
+- **Python Version:** 3.11 or above (required for all code and notebooks)
+- **Preferred Environment:** Jupyter Lab (for interactive development, tutorials, and prototyping)
+- **Dependency Management:** Poetry (planned), currently install dependencies as needed per notebook/module
 
-### Python Requirements
-- **Minimum Version:** Python 3.11+
-- **Dependency Management:** Poetry (required)
-- **Development Environment:** Jupyter Lab (preferred for workshop content)
+## Key Technologies and Frameworks
+- Python 3.11+
+- Jupyter Lab
+- PyTorch, HuggingFace Transformers, Datasets, Tokenizers
+- LangChain, DSpy, ChromaDB, Model Context Protocol (MCP)
+- Additional libraries as specified in individual notebooks
 
-### Key Technologies and Frameworks
-- Poetry for dependency management
-- Jupyter Lab for interactive development
-- Python 3.11+ for modern language features
+## Module-wise Overview
 
-### Installation Instructions
-Currently, the repository is in initial setup phase. Once workshop modules are added:
+### Module 01: Language Model Fundamentals
+- **Notebooks:**
+  - 01_text_representation.ipynb: Covers tokenization, vectorization, and word embeddings (Word2Vec, FastText)
+  - 02_contextual_embeddings.ipynb: Contextual embeddings using transformer models (BERT, MiniLM)
+- **Learning Objectives:**
+  - Understand text representation and embedding techniques
+  - Compare static and contextual embeddings
+  - Visualize and apply embeddings in NLP tasks
 
-1. Ensure Python 3.11+ is installed
-2. Install Poetry if not already available:
-   ```bash
-   curl -sSL https://install.python-poetry.org | python3 -
-   ```
-3. Clone the repository:
-   ```bash
-   git clone https://github.com/raghavbali/mastering_llms_workshop_dhs2025.git
-   cd mastering_llms_workshop_dhs2025
-   ```
-4. Install dependencies (when pyproject.toml is added):
-   ```bash
-   poetry install
-   ```
-5. Activate the virtual environment:
-   ```bash
-   poetry shell
-   ```
-6. Launch Jupyter Lab:
-   ```bash
-   jupyter lab
-   ```
+### Module 02: LLM Building Blocks
+- **Notebooks:**
+  - 01_transformers.ipynb: Transformer architecture and self-attention
+  - 02_transformers_pipelines.ipynb: HuggingFace pipelines for NLP tasks
+  - 03_training_language_models.ipynb: Fine-tuning and training LLMs
+  - 04_llm_training_and_scaling.ipynb: Scaling, optimization, and distributed training
+- **Model Card:** codeparrot-ds/README.md (fine-tuned GPT-2)
+- **Learning Objectives:**
+  - Master transformer internals and practical pipelines
+  - Train and fine-tune LLMs
+  - Understand scaling and optimization strategies
 
-## Workshop Structure (Planned)
-The workshop will follow a modular structure with the following planned components:
+### Module 03: Instruction Tuning and Alignment
+- **Notebooks:**
+  - 01_instruction_tuning_llama_txt2py.ipynb: Supervised instruction tuning
+  - 02_RLHF_phi2.ipynb: RLHF with Phi-2
+  - 03_zephyr_alignment_dpo.ipynb: DPO and advanced alignment
+- **Learning Objectives:**
+  - Instruction tuning for LLMs
+  - RLHF and preference optimization
+  - Direct Preference Optimization (DPO)
 
-### Module Organization
-- **01_foundations/**: Introduction to LLMs and basic concepts
-- **02_prompt_engineering/**: Prompt design and optimization techniques
-- **03_fine_tuning/**: Model customization and training
-- **04_deployment/**: Production deployment considerations
-- **utils/**: Shared utilities and helper functions
+### Module 04: LLM Applications
+- **Notebooks & Scripts:**
+  - 01_retrieval_augmented_llm_app.ipynb: Retrieval-Augmented Generation (RAG)
+  - 02_dspy_demo.ipynb: DSpy for prompt engineering
+  - 03_mcp_getting_started.ipynb: Model Context Protocol (MCP)
+  - app.py, mcp_chatbot.py, openai_mcp_handler.py, etc.: Application code
+- **Learning Objectives:**
+  - Build real-world LLM applications (RAG, LangChain, DSpy, MCP)
+  - Tool/function calling and workflow automation
 
-### File Naming Conventions
-- Jupyter notebooks: `##_descriptive_name.ipynb`
-- Python modules: `snake_case_naming.py`
-- Documentation: `descriptive-name.md`
+## Documentation and Maintenance Standards
+- All modules and notebooks are documented with clear markdown cells and outputs
+- Each module contains a README.md with:
+  - Title, description, and table of contents (with links to notebooks)
+  - Learning objectives and summary
+  - Attribution and timestamp
+- Main README.md provides workshop overview, setup, and navigation
+- **Keep llm.txt and all READMEs updated with each significant change**
+- Follow copilot-instructions.md for best practices, naming, and structure
 
-## Current Status
+## Code Quality and Testing
+- All code uses Python 3.11+ features and type hints optionally present
+- Notebooks are tested for end-to-end execution
 
-### Completed Items
-- [x] Repository initialization
-- [x] License setup (GPL v3.0)
-- [x] Comprehensive .gitignore for Python projects
-- [x] Basic README.md structure
-- [x] Copilot instructions for development guidelines
-- [x] Initial llm.txt documentation
+## Resource and Accessibility Guidelines
+- Designed for low-resource and cloud environments
+- GPU recommended for training/fine-tuning, but alternatives provided
+- Content accessible for both beginners and advanced users
+- Multiple learning paths and practical exercises included
 
-### Pending Items
-- [ ] Poetry project configuration (pyproject.toml)
-- [ ] Workshop module structure creation
-- [ ] Jupyter notebook templates
-- [ ] Core utility functions
-- [ ] Requirements and dependencies definition
-- [ ] Detailed README.md with workshop overview
-- [ ] Sample datasets and resources
-- [ ] Testing framework setup
+## Contribution and Version Control
+- Follow atomic commits and conventional commit messages
+- Update documentation and llm.txt with code changes
+- Test all workshop materials before merging
+- Keep style and approach consistent across modules
 
-## Documentation Guidelines
-
-### Maintenance Requirements
-- Update this llm.txt file with each significant change
-- Keep README.md synchronized with workshop structure
-- Document all new dependencies and their purposes
-- Include installation and setup instructions
-- Track workshop progression and learning objectives
-
-### Content Standards
-- Use clear, educational language appropriate for workshop participants
-- Include practical examples and hands-on exercises
-- Provide both theoretical background and implementation details
-- Support multiple skill levels and learning paths
-
-## Resource Requirements
-
-### Computational Needs
-- Standard laptop/desktop for basic workshop modules
-- GPU access recommended for fine-tuning exercises
-- Cloud alternatives for resource-intensive tasks
-- Internet connection for accessing pre-trained models
-
-### Software Dependencies
-- Python 3.11+ runtime
-- Poetry package manager
-- Jupyter Lab environment
-- Git for version control
-- Additional ML/AI libraries (to be specified)
-
-## Contributing Guidelines
-
-### Development Workflow
-1. Follow the guidelines in copilot-instructions.md
-2. Use Poetry for all dependency management
-3. Create meaningful, descriptive filenames
-4. Update documentation with code changes
-5. Test workshop materials before submitting
-6. Keep commits atomic and well-documented
-
-### Quality Standards
-- Ensure all code works with Python 3.11+
-- Use type hints and proper documentation
-- Include practical examples in all workshop modules
-- Validate end-to-end workshop experience
-- Maintain consistency across all materials
-
-## Contact and Support
-For questions about this workshop or repository structure, please refer to the main repository documentation or open an issue on GitHub.
+## Learning Resources and References
+- See module READMEs and notebooks for links to papers, docs, and external resources
+- Workshop website: https://raghavbali.github.io/mastering_llms_workshop/
 
 ---
-**Last Updated:** Initial creation
-**Next Review:** Upon addition of first workshop module
+**Last Updated:** August 10, 2025  
+**Generated by:** GitHub Copilot (LLM)  
+---
