@@ -3,7 +3,7 @@
 A comprehensive full-day workshop covering the fundamentals and advanced concepts of Large Language Models (LLMs), from theoretical foundations to practical implementation and deployment strategies.
 
 > [!Note]
-> Visit [workshop website](https://raghavbali.github.io/mastering_llms_workshop/) @ (https://raghavbali.github.io/mastering_llms_workshop/)[https://raghavbali.github.io/mastering_llms_workshop/] to navigate with ease
+> Visit [workshop website](https://raghavbali.github.io/mastering_llms_workshop/) to navigate with ease
 
 ## Workshop Details
 
@@ -14,11 +14,11 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
 
 ## Modules
 
-### Module 01: Text Representation
+### [Module 01: Text Representation](docs/module_01_lm_fundamentals/README.md)
 - Fundamentals of text representation
 - Contextual embeddings using transformers.
 
-### Module 02: LLM Building Blocks
+### [Module 02: LLM Building Blocks](docs/module_02_llm_building_blocks/)
 - Internals of the transformer architecture: attention mechanism, embeddings, and core components that make up large language models
 - HuggingFace pipelines for different tasks a language model can handle: classification, text generation, etc. 
 - Fine-tune a pretrained GPT2 for code-generation.
@@ -26,11 +26,11 @@ A comprehensive full-day workshop covering the fundamentals and advanced concept
   - PEFT
   - Quantization/LoRA
 
-### Module 03: Instruction Tuning and Alignment
+### [Module 03: Instruction Tuning and Alignment](docs/module_03_instruction_tuning_and_alignment/)
 - Instruction Tuning
 - LLM alignment or Performance Tuning using RLHF/PPO
 
-### Module 04: LLM Ops
+### [Module 04: LLM Applications](docs/module_04_llm_apps/)
 - RAG
 - LangChain
 - DSpy
