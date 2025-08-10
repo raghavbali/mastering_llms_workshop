@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering LLMs Workshop - Instructor Material</title>
+    <link rel="stylesheet" href="slides.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Slide 1: Introduction -->
+    <div class="slide active" id="slide1">
+        <div class="slide-content intro-slide">
+            <h1 class="main-title" id="main-title">Mastering LLMs</h1>
+            <h2 class="subtitle" id="subtitle">Training, Fine-Tuning and Best Practices</h2>
+            <div class="instructor-info">
+                <p class="instructor" id="instructor">Raghav Bali, Principal Data Scientist, DeliveryHero</p>
+            </div>
+        </div>
+        <footer class="slide-footer" id="footer">Mastering LLMs Workshop - Raghav Bali</footer>
+    </div>
+
+    <!-- Slide 2: Agenda -->
+    <div class="slide" id="slide2">
+        <div class="slide-content">
+            <h1 class="slide-title">Agenda</h1>
+            <div class="agenda-container" id="agenda-container">
+                <!-- Agenda items will be populated dynamically -->
+            </div>
+        </div>
+        <footer class="slide-footer" id="footer">Mastering LLMs Workshop - Raghav Bali</footer>
+    </div>
+
+    <!-- Slide 3: About Instructor -->
+    <div class="slide" id="slide3">
+        <div class="slide-content instructor-slide">
+            <h1 class="slide-title" id="instructor-title">Raghav Bali</h1>
+            <div class="instructor-layout">
+                <div class="instructor-photo">
+                    <div class="photo-placeholder" id="instructor-photo">
+                        [instructor_photo_circle_crop]
+                    </div>
+                </div>
+                <div class="instructor-details">
+                    <div class="intro-placeholder" id="instructor-intro">
+                        [instructor_short_intro]
+                    </div>
+                    <div class="book-info" id="book-info">
+                        [recent_generative_ai_book_info]
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="slide-footer" id="footer">Mastering LLMs Workshop - Raghav Bali</footer>
+    </div>
+
+    <!-- Slide 4: Getting Started -->
+    <div class="slide" id="slide4">
+        <div class="slide-content">
+            <h1 class="slide-title">Getting Started</h1>
+            <div class="getting-started-content">
+                <div class="setup-section">
+                    <h3>Setup Instructions</h3>
+                    <ul class="setup-list">
+                        <li>🌐 Test your wifi/internet
+                            <div class="wifi-details" id="wifi-details">[wifi_network_details]</div>
+                        </li>
+                        <li>💻 If you have well configured system/laptop, clone the repository
+                            <div class="repo-link" id="repo-link">
+                                <code>git clone https://github.com/raghavbali/mastering_llms_workshop</code>
+                            </div>
+                        </li>
+                        <li>🤝 If you have issues accessing the repository, ask volunteers for help</li>
+                    </ul>
+                </div>
+                
+                <div class="breaks-section">
+                    <h3>Schedule & Breaks</h3>
+                    <div class="breaks-list" id="breaks-list">
+                        <!-- Breaks will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="slide-footer" id="footer">Mastering LLMs Workshop - Raghav Bali</footer>
+    </div>
+
+    <!-- Slide 5: Let's Get Started -->
+    <div class="slide" id="slide5">
+        <div class="slide-content kickstart-slide">
+            <h1 class="slide-title">Let's Get Started</h1>
+            <div class="kickstart-content">
+                <div class="kickstart-image" id="kickstart-image">
+                    [workshop_kickstart_image]
+                </div>
+                <div class="access-info">
+                    <h3>🚀 Access Workshop Materials</h3>
+                    <div class="materials-link" id="materials-link">
+                        <a href="index.html" target="_blank">
+                            <code>Open: index.html</code>
+                        </a>
+                    </div>
+                    <div class="reminder">
+                        <p>⭐ <strong>Remember to star the repository for future use!</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="slide-footer" id="footer">Mastering LLMs Workshop - Raghav Bali</footer>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button id="prevBtn" onclick="changeSlide(-1)">‹ Previous</button>
+        <span class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+        </span>
+        <button id="nextBtn" onclick="changeSlide(1)">Next ›</button>
+    </div>
+
+    <script src="slides.js"></script>
+</body>
+</html>

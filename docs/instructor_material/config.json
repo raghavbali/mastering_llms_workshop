@@ -1,0 +1,81 @@
+{
+  "global": {
+    "footer_text": "Mastering LLMs Workshop - Raghav Bali",
+    "main_title": "Mastering LLMs",
+    "subtitle": "Training, Fine-Tuning and Best Practices",
+    "instructor_name": "Raghav Bali",
+    "instructor_designation": "Principal Data Scientist, DeliveryHero",
+    "repository_link": "https://github.com/raghavbali/mastering_llms_workshop",
+    "workshop_materials_link": "index.html"
+  },
+  "slides": {
+    "slide1": {
+      "title": "{{global.main_title}}",
+      "subtitle": "{{global.subtitle}}",
+      "instructor": "{{global.instructor_name}}, {{global.instructor_designation}}"
+    },
+    "slide2": {
+      "title": "Agenda",
+      "modules": [
+        {
+          "title": "Module 1: Language Model Fundamentals",
+          "description": "Understanding text representation and contextual embeddings",
+          "duration": "[time]"
+        },
+        {
+          "title": "Module 2: LLM Building Blocks",
+          "description": "Transformers, training, and scaling strategies",
+          "duration": "[time]"
+        },
+        {
+          "title": "Module 3: Instruction Tuning & Alignment",
+          "description": "Fine-tuning techniques and RLHF implementation",
+          "duration": "[time]"
+        },
+        {
+          "title": "Module 4: LLM Applications",
+          "description": "Building RAG systems and production-ready applications",
+          "duration": "[time]"
+        }
+      ]
+    },
+    "slide3": {
+      "title": "{{global.instructor_name}}",
+      "photo_placeholder": "[instructor_photo_circle_crop]",
+      "intro_placeholder": "[instructor_short_intro]",
+      "book_placeholder": "[recent_generative_ai_book_info]"
+    },
+    "slide4": {
+      "title": "Getting Started",
+      "wifi_details": "[wifi_network_details]",
+      "repository_link": "{{global.repository_link}}",
+      "breaks": [
+        {
+          "name": "Tea/Coffee Break",
+          "time": "[time] am"
+        },
+        {
+          "name": "Lunch Break",
+          "time": "[time] pm"
+        },
+        {
+          "name": "Tea/Coffee Break",
+          "time": "[time] pm"
+        },
+        {
+          "name": "Networking Session & Quiz with Prize(s)",
+          "time": "[time] pm"
+        },
+        {
+          "name": "Wrap Up",
+          "time": "[time] pm"
+        }
+      ]
+    },
+    "slide5": {
+      "title": "Let's Get Started",
+      "kickstart_image_placeholder": "[workshop_kickstart_image]",
+      "materials_link": "{{global.workshop_materials_link}}"
+    }
+  }
+}

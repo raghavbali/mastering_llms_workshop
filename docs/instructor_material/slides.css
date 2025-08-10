@@ -1,0 +1,414 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #2d3748;
+    overflow: hidden;
+}
+
+/* Slide Container */
+.slide {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    padding: 60px 80px 100px 80px;
+    background: #ffffff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.slide.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Typography */
+.main-title {
+    font-size: 4.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 3rem;
+    line-height: 1.4;
+}
+
+.slide-title {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    color: #2d3748;
+    text-align: center;
+}
+
+/* Introduction Slide */
+.intro-slide {
+    text-align: center;
+}
+
+.instructor-info {
+    margin-top: 2rem;
+}
+
+.instructor {
+    font-size: 1.5rem;
+    color: #667eea;
+    font-weight: 500;
+}
+
+/* Agenda Slide */
+.agenda-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.agenda-item {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 2rem;
+    border-radius: 16px;
+    border-left: 6px solid #667eea;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.agenda-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.agenda-item h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.8rem;
+}
+
+.agenda-item p {
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.agenda-duration {
+    font-size: 0.9rem;
+    color: #667eea;
+    font-weight: 600;
+    background: rgba(102, 126, 234, 0.1);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* Instructor Slide */
+.instructor-slide .slide-title {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.instructor-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.photo-placeholder {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+}
+
+.instructor-details {
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+.intro-placeholder,
+.book-info {
+    background: #f7fafc;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1rem 0;
+    border-left: 4px solid #667eea;
+    color: #4a5568;
+}
+
+/* Getting Started Slide */
+.getting-started-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.setup-section h3,
+.breaks-section h3 {
+    font-size: 1.6rem;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.setup-list {
+    list-style: none;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.setup-list li {
+    margin-bottom: 1.5rem;
+    color: #4a5568;
+}
+
+.wifi-details,
+.repo-link {
+    background: #f7fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    font-family: 'Courier New', monospace;
+}
+
+.repo-link code {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.breaks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.break-item {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.break-name {
+    font-weight: 500;
+    color: #2d3748;
+}
+
+.break-time {
+    color: #667eea;
+    font-weight: 600;
+    background: rgba(102, 126, 234, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+/* Kickstart Slide */
+.kickstart-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.kickstart-image {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 300px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 2rem;
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+}
+
+.access-info h3 {
+    font-size: 1.8rem;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.materials-link {
+    background: #f7fafc;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid #667eea;
+    margin-bottom: 2rem;
+}
+
+.materials-link a {
+    text-decoration: none;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.materials-link:hover {
+    background: rgba(102, 126, 234, 0.05);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.reminder {
+    text-align: center;
+    background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid #f59e0b;
+}
+
+.reminder p {
+    color: #92400e;
+    font-size: 1.2rem;
+}
+
+/* Footer */
+.slide-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Navigation */
+.navigation {
+    position: fixed;
+    bottom: 60px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.navigation button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navigation button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+}
+
+.navigation button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.slide-counter {
+    color: #4a5568;
+    font-weight: 500;
+    margin: 0 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .slide {
+        padding: 40px 60px 80px 60px;
+    }
+    
+    .main-title {
+        font-size: 3.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.6rem;
+    }
+    
+    .slide-title {
+        font-size: 2.5rem;
+    }
+    
+    .agenda-container,
+    .getting-started-content,
+    .kickstart-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .instructor-layout {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide {
+        padding: 30px 40px 60px 40px;
+    }
+    
+    .main-title {
+        font-size: 2.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1.3rem;
+    }
+    
+    .slide-title {
+        font-size: 2rem;
+    }
+}
