@@ -7,7 +7,7 @@ import requests
 from retry import retry
 import streamlit as st
 import chromadb.utils.embedding_functions as embedding_functions
-from huggingface_hub import InferenceClient
+from huggingface_hub import InferenceClient,login
 from openai import OpenAI
 import ollama
 from constants import (
@@ -16,8 +16,6 @@ from constants import (
     HEADERS,
     EMB_MODEL_ID,
     EMB_API_URL,
-    QA_MODEL_ID,
-    HF_QA_ENDPOINT,
     HF_LM_ENDPOINT,
     OPENAI_ENDPOINT,
     LOCAL_OLLAMA_ENDPOINT,
@@ -26,8 +24,8 @@ from constants import (
 
 import chromadb
 
-
 lm_df = pd.DataFrame.from_dict(AVAILABLE_LMs)
+login(token=HF_TOKEN, add_to_git_credential=True)
 
 #####################
 ## Utility Functions
@@ -77,31 +75,24 @@ def get_relevant_documents(query, db):
   except Exception as ex:
       return "Apologies but I could not process your query", 0.0, ex
 
-def get_hf_qa_answer(payload,lm_model):
-    data = json.dumps(payload)
-    try:
-      QA_API_URL = f"https://api-inference.huggingface.co/models/{lm_model}" 
-      response = requests.request("POST", QA_API_URL, headers=HEADERS, data=data)
-      decoded_response = json.loads(response.content.decode("utf-8"))
-      return decoded_response['answer'], decoded_response['score'], ""
-    except Exception as ex:
-      return "Apologies but I could not find any relevant answer", 0.0, ex
-
 # this is mostly timing out
 def get_hf_llm_answer(payload,lm_model):
     try:
         client = InferenceClient(
-        "google/gemma-2-2b-it",
-        token=HF_TOKEN,)
-
-        content = f"Given the context, answer the question. \ncontext:{payload['context']}\nquestion:{payload['question']}"
-        response= client.chat_completion(
-    	messages=[{"role": "user", "content": content}],
-    	max_tokens=500,
-    	stream=False,
+           provider="hf-inference",
+           api_key=HF_TOKEN
         )
-    
-        return json.loads(message.choices[0].delta.content), 0.0 
+        f"Given the context, perform the following tasks:1.Respond with a summarized answer to the question factually in few words only if the provided context contains the answer\n 2.Generate a relevance score.\n3. Format the output as a json with answer and score as keys. Do not add makrdown syntax.\nThink step by step.\ncontext:{payload['context']}\nquestion:{payload['question']}"
+        completion = client.chat.completions.create(
+            model=lm_model,
+            messages=[
+                {
+                    "role": "user",
+                    "content": content
+                }
+            ],
+        )        
+        return completion.choices[0].message.content, "", ""
     except Exception as ex:
       return "Apologies but I could not find any relevant answer", 0.0, ex
 
@@ -134,10 +125,10 @@ def get_opeai_answer(payload,lm_model):
                     "content": content,
                 }
             ],
-            model="gpt-4o-mini",
+            max_tokens=500,
+            model="gpt-4o-2024-11-20",
         )
-        json_output = json.loads(chat_completion.choices[0].message.content)
-        return json_output['answer'], json_output['score'], ""
+        return chat_completion.choices[0].message.content,"", ""
     except Exception as ex:
       return "Apologies but I could not find any relevant answer", 0.0, ex
 
@@ -153,9 +144,7 @@ def get_answer(question,context,lm_model):
     }
     try:
       endpoint_type = lm_df[lm_df['models']==lm_model]['endpoints'].values[0]  
-      if endpoint_type == HF_QA_ENDPOINT:
-          return get_hf_qa_answer(payload,lm_model)
-      elif endpoint_type == HF_LM_ENDPOINT:  
+      if endpoint_type == HF_LM_ENDPOINT:  
           return get_hf_llm_answer(payload,lm_model)
       elif endpoint_type == OPENAI_ENDPOINT: 
           return get_opeai_answer(payload,lm_model)
