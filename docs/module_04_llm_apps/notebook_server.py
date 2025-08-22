@@ -13,7 +13,9 @@ mcp = FastMCP(
 
 class NotebookServer():
     def __init__(self,mcp_instance):
-        self.notebook_scraper = NB_Markdown_Scraper(input_paths=[f'../Users/raghavbali/Documents/raghav/work/github/mastering_llms_workshop/docs/{d}' for d in os.listdir("./Users/raghavbali/Documents/raghav/work/github/mastering_llms_workshop/docs/") if d.startswith("module")])
+        self.start_dir = "/Users/raghavbali/Documents/raghav/work/github/mastering_llms_workshop/docs/"
+        input_path=[f'{self.start_dir}{d}' for d in os.listdir(self.start_dir) if d.startswith("module")]
+        self.notebook_scraper = NB_Markdown_Scraper(input_path)
         
         # Register methods  
         mcp_instance.tool(self.greet)
@@ -21,7 +23,7 @@ class NotebookServer():
         mcp_instance.tool(self.get_markdown_from_notebook)
         mcp_instance.tool(self.notebook_scraper.scrape_markdowns)
         mcp_instance.tool(self.write_json)
-        mcp_instance.tool(self.add_two_numbers)
+        mcp_instance.tool(self.get_start_dir_directory)
         mcp_instance.resource("resource://data")(self.resource_method)
 
     def greet(self,name: str= None):
@@ -30,17 +32,10 @@ class NotebookServer():
             return "Hi, I am NotebookServer"
         else:
             return f"Hi {name}, I am NotebookServer"
-    def add_two_numbers(self,a: int, b: int) -> int:
-        """
-        Add two numbers
-        Args:
-            a: The first integer number
-            b: The second integer number
-        
-        Returns:
-            int: The sum of the two numbers
-        """
-        return a + b
+
+    def get_start_dir_directory(self):
+        '''Returns the current working directory for the server'''
+        return self.start_dir
 
     def get_notebook_list(self):
         '''Returns List of Notebooks Scraped'''

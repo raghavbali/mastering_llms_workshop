@@ -74,7 +74,7 @@ if submit:
 
   # Showcase response on screen
   st.markdown(f"**Answer:** _{answer}_")
-  st.markdown(f"> **Relevance Score**:{score}")
+#   st.markdown(f"> **Relevance Score**:{score}")
   st.markdown("---")
 
   # Add more details if advanced option is chosen

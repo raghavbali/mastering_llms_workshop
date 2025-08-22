@@ -83,6 +83,7 @@ cd mastering_llms_workshop_dhs2025
 ## Thanks
 A huge round of thanks to amazing teams at:
 <div align="center" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+  <img src="./docs/assets/pytorch_logo.png" alt="Pytorch" style="height: 80px;">
   <img src="./docs/assets/00_hf.svg" alt="Hugging Face" style="height: 80px; border-radius: 50%; padding: 2px; background: white;">
   <img src="./docs/assets/00_ollama.png" alt="Ollama" style="height: 80px; border-radius: 50%; padding: 2px; background: white;">
   <img src="./docs/assets/00_unsloth.jpeg" alt="Unsloth" style="height: 80px;">
