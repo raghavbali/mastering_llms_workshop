@@ -82,7 +82,7 @@ def get_hf_llm_answer(payload,lm_model):
            provider="hf-inference",
            api_key=HF_TOKEN
         )
-        f"Given the context, perform the following tasks:1.Respond with a summarized answer to the question factually in few words only if the provided context contains the answer\n 2.Generate a relevance score.\n3. Format the output as a json with answer and score as keys. Do not add makrdown syntax.\nThink step by step.\ncontext:{payload['context']}\nquestion:{payload['question']}"
+        content = f"Given the context, perform the following tasks:1.Respond with a summarized answer to the question factually in few words only if the provided context contains the answer\n 2.Generate a relevance score.\n3. Format the output as a json with answer and score as keys. Do not add makrdown syntax.\nThink step by step.\ncontext:{payload['context']}\nquestion:{payload['question']}"
         completion = client.chat.completions.create(
             model=lm_model,
             messages=[
