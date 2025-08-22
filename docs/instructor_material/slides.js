@@ -194,6 +194,12 @@ function populateSlideContent() {
     if (config.slides?.slide5) {
         const slide5 = config.slides.slide5;
         
+        // Update WiFi details
+        const wifiDetails = document.getElementById('wifi-details');
+        if (wifiDetails && slide5.wifi_details) {
+            wifiDetails.textContent = slide5.wifi_details;
+        }
+        
         // Update repository link
         const repoLink = document.getElementById('repo-link');
         if (repoLink && slide5.repository_link) {
@@ -242,6 +248,7 @@ function populateSlideContent() {
             reminder.innerHTML = `<p><strong>${slide6.reminder_text}</strong></p>`;
         }
     }
+    
 }
 
 // Resolve template variables (simple implementation)
